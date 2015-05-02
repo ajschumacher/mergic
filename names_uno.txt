@@ -1,0 +1,670 @@
+original,uno
+K Pliskova,Karolina Pliskova
+Kr.Pliskova,Karolina Pliskova
+Kristyna Pliskova,Karolina Pliskova
+Karolina Pliskova,Karolina Pliskova
+Ka.Pliskova,Karolina Pliskova
+A Medina Garrigues,Anabel Medina Garrigues
+A. Medina Garrigues,Anabel Medina Garrigues
+A.Medina Garrigues,Anabel Medina Garrigues
+Anabel Medina Garrigues,Anabel Medina Garrigues
+P Kvitova,Petra Kvitova
+Petra Kvitova,Petra Kvitova
+P.Kvitova,Petra Kvitova
+S.Peng,Shuai Peng
+S Peng,Shuai Peng
+Shuai Peng,Shuai Peng
+U.Radwanska,Urszula Radwanska
+U Radwanska,Urszula Radwanska
+Urszula Radwanska,Urszula Radwanska
+Julia Goerges,Julia Goerges
+J.Goerges,Julia Goerges
+J Goerges,Julia Goerges
+F.Pennetta,Flavia Pennetta
+Flavia Pennetta,Flavia Pennetta
+F Pennetta,Flavia Pennetta
+L.Dominguez Lino,Lourdes Dominguez Lino
+L Dominguez Lino,Lourdes Dominguez Lino
+Lourdes Dominguez Lino,Lourdes Dominguez Lino
+O Govortsova,Olga Govortsova
+O.Govortsova,Olga Govortsova
+Olga Govortsova,Olga Govortsova
+N.Li,Na Li
+N Li,Na Li
+Na Li,Na Li
+H.Watson,Heather Watson
+H Watson,Heather Watson
+Heather Watson,Heather Watson
+A.Kuznetsov,Andrey Kuznetsov
+Andrey Kuznetsov,Andrey Kuznetsov
+Alex Kuznetsov,Andrey Kuznetsov
+Mallory Burdette,Mallory Burdette
+M Burdette,Mallory Burdette
+M.Burdette,Mallory Burdette
+J.Hampton,Jamie Hampton
+Jamie Hampton,Jamie Hampton
+J Hampton,Jamie Hampton
+D.Hantuchova,Daniela Hantuchova
+Daniela Hantuchova,Daniela Hantuchova
+D Hantuchova,Daniela Hantuchova
+F Schiavone,Francesca Schiavone
+Francesca Schiavone,Francesca Schiavone
+F.Schiavone,Francesca Schiavone
+Eugenie Bouchard,Eugenie Bouchard
+E.Bouchard,Eugenie Bouchard
+E Bouchard,Eugenie Bouchard
+A.Cornet,Alize Cornet
+A Cornet,Alize Cornet
+Alize Cornet,Alize Cornet
+C Suarez Navarro,Carla Suarez Navarro
+Carla Suarez Navarro,Carla Suarez Navarro
+C.Suarez Navarro,Carla Suarez Navarro
+M Minella,Mandy Minella
+M.Minella,Mandy Minella
+Mandy Minella,Mandy Minella
+J.Zheng,Jie Zheng
+J Zheng,Jie Zheng
+Jie Zheng,Jie Zheng
+Y Shvedova,Yaroslava Shvedova
+Y.Shvedova,Yaroslava Shvedova
+Yaroslava Shvedova,Yaroslava Shvedova
+C Giorgi,Camila Giorgi
+Camila Giorgi,Camila Giorgi
+C.Giorgi,Camila Giorgi
+Victoria Azarenka,Victoria Azarenka
+V.Azarenka,Victoria Azarenka
+V Azarenka,Victoria Azarenka
+A.Riske,Alison Riske
+A Riske,Alison Riske
+Alison Riske,Alison Riske
+L Robson,Laura Robson
+Laura Robson,Laura Robson
+L.Robson,Laura Robson
+Ekaterina Makarova,Ekaterina Makarova
+E Makarova,Ekaterina Makarova
+E.Makarova,Ekaterina Makarova
+S.Errani,Sara Errani
+Sara Errani,Sara Errani
+S Errani,Sara Errani
+S.Stephens,Sloane Stephens
+S Stephens,Sloane Stephens
+Sloane Stephens,Sloane Stephens
+S.Arvidsson,Sofia Arvidsson
+Sofia Arvidsson,Sofia Arvidsson
+S Arvidsson,Sofia Arvidsson
+A Kerber,Angelique Kerber
+A.Kerber,Angelique Kerber
+Angelique Kerber,Angelique Kerber
+Kristina Mladenovic,Kristina Mladenovic
+K.Mladenovic,Kristina Mladenovic
+K Mladenovic,Kristina Mladenovic
+G.Voskoboeva,Galina Voskoboeva
+G Voskoboeva,Galina Voskoboeva
+Galina Voskoboeva,Galina Voskoboeva
+A.Tomljanovic,Ajla Tomljanovic
+A Tomljanovic,Ajla Tomljanovic
+Ajla Tomljanovic,Ajla Tomljanovic
+Caroline Garcia,Caroline Garcia
+C Garcia,Caroline Garcia
+C.Garcia,Caroline Garcia
+M.Kirilenko,Maria Kirilenko
+Maria Kirilenko,Maria Kirilenko
+M Kirilenko,Maria Kirilenko
+K Flipkens,Kirsten Flipkens
+Kirsten Flipkens,Kirsten Flipkens
+K.Flipkens,Kirsten Flipkens
+V.Lepchenko,Varvara Lepchenko
+Varvara Lepchenko,Varvara Lepchenko
+V Lepchenko,Varvara Lepchenko
+S Stosur,Samantha Stosur
+S.Stosur,Samantha Stosur
+Samantha Stosur,Samantha Stosur
+L Arruabarrena,Lara Arruabarrena
+Lara Arruabarrena,Lara Arruabarrena
+L.Arruabarrena,Lara Arruabarrena
+A Ivanovic,Ana Ivanovic
+Ana Ivanovic,Ana Ivanovic
+A.Ivanovic,Ana Ivanovic
+M.Barthel,Mona Barthel
+M Barthel,Mona Barthel
+Mona Barthel,Mona Barthel
+Anastasia Pavlyuchenkova,Anastasia Pavlyuchenkova
+A.Pavlyuchenkova,Anastasia Pavlyuchenkova
+A Pavlyuchenkova,Anastasia Pavlyuchenkova
+A Petkovic,Andrea Petkovic
+Andrea Petkovic,Andrea Petkovic
+A.Petkovic,Andrea Petkovic
+A.Tatishvili,Anna Tatishvili
+A Tatishvili,Anna Tatishvili
+Anna Tatishvili,Anna Tatishvili
+Lauren Davis,Lauren Davis
+L Davis,Lauren Davis
+L.Davis,Lauren Davis
+Karin Knapp,Karin Knapp
+K Knapp,Karin Knapp
+K.Knapp,Karin Knapp
+J.Jankovic,Jelena Jankovic
+J Jankovic,Jelena Jankovic
+Jelena Jankovic,Jelena Jankovic
+A.Beck,Andreas Beck
+Annika Beck,Andreas Beck
+Andreas Beck,Andreas Beck
+R Vinci,Roberta Vinci
+Roberta Vinci,Roberta Vinci
+R.Vinci,Roberta Vinci
+Lucie Hradecka,Lucie Hradecka
+L.Hradecka,Lucie Hradecka
+L Hradecka,Lucie Hradecka
+B.Jovanovski,Bojana Jovanovski
+B Jovanovski,Bojana Jovanovski
+Bojana Jovanovski,Bojana Jovanovski
+C Vandeweghe,Coco Vandeweghe
+Coco Vandeweghe,Coco Vandeweghe
+C.Vandeweghe,Coco Vandeweghe
+C.McHale,Christina McHale
+Christina McHale,Christina McHale
+C McHale,Christina McHale
+K.Kanepi,Kaia Kanepi
+Kaia Kanepi,Kaia Kanepi
+K Kanepi,Kaia Kanepi
+S.Cirstea,Sorana Cirstea
+S Cirstea,Sorana Cirstea
+Sorana Cirstea,Sorana Cirstea
+Madison Keys,Madison Keys
+M.Keys,Madison Keys
+M Keys,Madison Keys
+Sabine Lisicki,Sabine Lisicki
+S Lisicki,Sabine Lisicki
+S.Lisicki,Sabine Lisicki
+Y.Meusburger,Yvonne Meusburger
+Yvonne Meusburger,Yvonne Meusburger
+Y Meusburger,Yvonne Meusburger
+C Scheepers,Chanelle Scheepers
+Chanelle Scheepers,Chanelle Scheepers
+C.Scheepers,Chanelle Scheepers
+Elina Svitolina,Elina Svitolina
+E Svitolina,Elina Svitolina
+E.Svitolina,Elina Svitolina
+Misaki Doi,Misaki Doi
+M Doi,Misaki Doi
+M.Doi,Misaki Doi
+Simona Halep,Simona Halep
+S.Halep,Simona Halep
+S Halep,Simona Halep
+S Williams,Serena Williams
+S.Williams,Serena Williams
+Serena Williams,Serena Williams
+Caroline Wozniacki,Caroline Wozniacki
+C Wozniacki,Caroline Wozniacki
+C.Wozniacki,Caroline Wozniacki
+K Date-Krumm,Kimiko Date-Krumm
+Kimiko Date-Krumm,Kimiko Date-Krumm
+K.Date-Krumm,Kimiko Date-Krumm
+M.Puig,Monica Puig
+Monica Puig,Monica Puig
+R.Harrison,Ryan Harrison
+Ryan Harrison,Ryan Harrison
+Marion Bartoli,Marion Bartoli
+M.Bartoli,Marion Bartoli
+Roger Federer,Roger Federer
+R.Federer,Roger Federer
+Marcel Granollers,Marcel Granollers
+M.Granollers,Marcel Granollers
+Monica Niculescu,Monica Niculescu
+M.Niculescu,Monica Niculescu
+J.Zopp,Jurgen Zopp
+Jurgen Zopp,Jurgen Zopp
+A.Dolgopolov,Alexandr Dolgopolov
+Alexandr Dolgopolov,Alexandr Dolgopolov
+Mikhail Youzhny,Mikhail Youzhny
+M.Youzhny,Mikhail Youzhny
+P.Kohlschreiber,Philipp Kohlschreiber
+Philipp Kohlschreiber,Philipp Kohlschreiber
+M.Johansson,Mathilde Johansson
+Mathilde Johansson,Mathilde Johansson
+N.Mahut,Nicolas Mahut
+Nicolas Mahut,Nicolas Mahut
+Kurumi Nara,Kurumi Nara
+K Nara,Kurumi Nara
+R.Oprandi,Romina Oprandi
+Romina Oprandi,Romina Oprandi
+R.Gasquet,Richard Gasquet
+Richard Gasquet,Richard Gasquet
+Elena Vesnina,Elena Vesnina
+E.Vesnina,Elena Vesnina
+M.Alund,Martin Alund
+Martin Alund,Martin Alund
+Mariana Duque-Marino,Mariana Duque-Marino
+M.Duque-Marino,Mariana Duque-Marino
+G.Pella,Guido Pella
+Guido Pella,Guido Pella
+M.Przysiezny,Michal Przysiezny
+Michal Przysiezny,Michal Przysiezny
+Klara Zakopalova,Klara Zakopalova
+K.Zakopalova,Klara Zakopalova
+Lucie Safarova,Lucie Safarova
+L.Safarova,Lucie Safarova
+P.Petzschner,Philipp Petzschner
+Philipp Petzschner,Philipp Petzschner
+Kenny De Schepper,Kenny De Schepper
+K.De Schepper,Kenny De Schepper
+L.Mayer,Leonardo Mayer
+Leonardo Mayer,Leonardo Mayer
+Ivan Dodig,Ivan Dodig
+I.Dodig,Ivan Dodig
+Y.Putintseva,Yulia Putintseva
+Yulia Putintseva,Yulia Putintseva
+Arantxa Rus,Arantxa Rus
+A.Rus,Arantxa Rus
+Johanna Larsson,Johanna Larsson
+J.Larsson,Johanna Larsson
+Y Duan,Ying-Ying Duan
+Ying-Ying Duan,Ying-Ying Duan
+M.Ebden,Matthew Ebden
+Matthew Ebden,Matthew Ebden
+J.Duckworth,James Duckworth
+James Duckworth,James Duckworth
+Alexandra Cadantu,Alexandra Cadantu
+A.Cadantu,Alexandra Cadantu
+Daniel Gimeno-Traver,Daniel Gimeno-Traver
+D.Gimeno-Traver,Daniel Gimeno-Traver
+Melanie Oudin,Melanie Oudin
+M.Oudin,Melanie Oudin
+S.Stakhovsky,Sergiy Stakhovsky
+Sergiy Stakhovsky,Sergiy Stakhovsky
+M.Cilic,Marin Cilic
+Marin Cilic,Marin Cilic
+Tatjana Maria,Tatjana Maria
+T.Maria,Tatjana Maria
+Sam Querrey,Sam Querrey
+S.Querrey,Sam Querrey
+Denis Istomin,Denis Istomin
+D.Istomin,Denis Istomin
+B.Mattek-Sands,Bethanie Mattek-Sands
+Bethanie Mattek-Sands,Bethanie Mattek-Sands
+A.Murray,Andy Murray
+Andy Murray,Andy Murray
+K.Bertens,Kiki Bertens
+Kiki Bertens,Kiki Bertens
+Andreas Seppi,Andreas Seppi
+A.Seppi,Andreas Seppi
+H.Zeballos,Horacio Zeballos
+Horacio Zeballos,Horacio Zeballos
+V.Dolonc,Vesna Dolonc
+Vesna Dolonc,Vesna Dolonc
+Timea Babos,Timea Babos
+T.Babos,Timea Babos
+J.Reister,Julian Reister
+Julian Reister,Julian Reister
+John Isner,John Isner
+J.Isner,John Isner
+Jan Hajek,Jan Hajek
+J.Hajek,Jan Hajek
+Fernando Verdasco,Fernando Verdasco
+F.Verdasco,Fernando Verdasco
+G.Garcia-Lopez,Guillermo Garcia-Lopez
+Guillermo Garcia-Lopez,Guillermo Garcia-Lopez
+G.Simon,Gilles Simon
+Gilles Simon,Gilles Simon
+Olga Puchkova,Olga Puchkova
+O.Puchkova,Olga Puchkova
+Julien Benneteau,Julien Benneteau
+J.Benneteau,Julien Benneteau
+V.King,Vania King
+Vania King,Vania King
+T.Pironkova,Tsvetana Pironkova
+Tsvetana Pironkova,Tsvetana Pironkova
+L.Kubot,Lukasz Kubot
+Lukasz Kubot,Lukasz Kubot
+Guillaume Rufin,Guillaume Rufin
+G.Rufin,Guillaume Rufin
+A.Bogomolov Jr.,Alex Bogomolov Jr.
+Alex Bogomolov Jr.,Alex Bogomolov Jr.
+Paula Ormaechea,Paula Ormaechea
+P Ormaechea,Paula Ormaechea
+V Williams,Venus Williams
+Venus Williams,Venus Williams
+Janko Tipsarevic,Janko Tipsarevic
+J.Tipsarevic,Janko Tipsarevic
+L.Tsurenko,Lesia Tsurenko
+Lesia Tsurenko,Lesia Tsurenko
+D.Brands,Daniel Brands
+Daniel Brands,Daniel Brands
+R.Ram,Rajeev Ram
+Rajeev Ram,Rajeev Ram
+A.Morita,Ayumi Morita
+Ayumi Morita,Ayumi Morita
+A.Ungur,Adrian Ungur
+Adrian Ungur,Adrian Ungur
+Victor Hanescu,Victor Hanescu
+V.Hanescu,Victor Hanescu
+T.Haas,Tommy Haas
+Tommy Haas,Tommy Haas
+A.Montanes,Albert Montanes
+Albert Montanes,Albert Montanes
+Jo-Wilfried Tsonga,Jo-Wilfried Tsonga
+J-W.Tsonga,Jo-Wilfried Tsonga
+Dominika Cibulkova,Dominika Cibulkova
+D.Cibulkova,Dominika Cibulkova
+Marcos Baghdatis,Marcos Baghdatis
+M.Baghdatis,Marcos Baghdatis
+Florian Mayer,Florian Mayer
+F.Mayer,Florian Mayer
+Jana Cepelova,Jana Cepelova
+J.Cepelova,Jana Cepelova
+V.Pospisil,Vasek Pospisil
+Vasek Pospisil,Vasek Pospisil
+P.Andujar,Pablo Andujar
+Pablo Andujar,Pablo Andujar
+M.Matosevic,Marinko Matosevic
+Marinko Matosevic,Marinko Matosevic
+Thiemo De Bakker,Thiemo De Bakker
+T.De Bakker,Thiemo De Bakker
+Kei Nishikori,Kei Nishikori
+K.Nishikori,Kei Nishikori
+A.Radwanska,Agnieszka Radwanska
+Agnieszka Radwanska,Agnieszka Radwanska
+M.Erakovic,Marina Erakovic
+Marina Erakovic,Marina Erakovic
+Benoit Paire,Benoit Paire
+B.Paire,Benoit Paire
+M.Torro-Flor,Maria-Teresa Torro-Flor
+Maria-Teresa Torro-Flor,Maria-Teresa Torro-Flor
+T.Gabashvili,Teymuraz Gabashvili
+Teymuraz Gabashvili,Teymuraz Gabashvili
+W.Odesnik,Wayne Odesnik
+Wayne Odesnik,Wayne Odesnik
+M.Klizan,Martin Klizan
+Martin Klizan,Martin Klizan
+Anna Schmiedlova,Anna Schmiedlova
+A.Schmiedlova,Anna Schmiedlova
+Grega Zemlja,Grega Zemlja
+G.Zemlja,Grega Zemlja
+Pauline Parmentier,Pauline Parmentier
+P.Parmentier,Pauline Parmentier
+P.Lorenzi,Paolo Lorenzi
+Paolo Lorenzi,Paolo Lorenzi
+J.Nieminen,Jarkko Nieminen
+Jarkko Nieminen,Jarkko Nieminen
+Stephane Robert,Stephane Robert
+S.Robert,Stephane Robert
+David Ferrer,David Ferrer
+D.Ferrer,David Ferrer
+I.Begu,Irina-Camelia Begu
+Irina-Camelia Begu,Irina-Camelia Begu
+M.Sharapova,Maria Sharapova
+Maria Sharapova,Maria Sharapova
+Alejandro Falla,Alejandro Falla
+A.Falla,Alejandro Falla
+D.Kudla,Denis Kudla
+Denis Kudla,Denis Kudla
+Xavier Malisse,Xavier Malisse
+X.Malisse,Xavier Malisse
+Silvia Soler-Espinosa,Silvia Soler-Espinosa
+S.Soler-Espinosa,Silvia Soler-Espinosa
+Aljaz Bedene,Aljaz Bedene
+A.Bedene,Aljaz Bedene
+Elena Baltacha,Elena Baltacha
+E.Baltacha,Elena Baltacha
+A.Hlavackova,Andrea Hlavackova
+Andrea Hlavackova,Andrea Hlavackova
+R.Nadal,Rafael Nadal
+Rafael Nadal,Rafael Nadal
+S Kuznetsova,Svetlana Kuznetsova
+Svetlana Kuznetsova,Svetlana Kuznetsova
+James Blake,James Blake
+J.Blake,James Blake
+Donna Vekic,Donna Vekic
+D.Vekic,Donna Vekic
+Roberto Bautista Agut,Roberto Bautista Agut
+R.Bautista Agut,Roberto Bautista Agut
+Kevin Anderson,Kevin Anderson
+K.Anderson,Kevin Anderson
+Grigor Dimitrov,Grigor Dimitrov
+G.Dimitrov,Grigor Dimitrov
+N.Djokovic,Novak Djokovic
+Novak Djokovic,Novak Djokovic
+P.Martic,Petra Martic
+Petra Martic,Petra Martic
+Mirjana Lucic-Baroni,Mirjana Lucic-Baroni
+M.Lucic-Baroni,Mirjana Lucic-Baroni
+P.Cetkovska,Petra Cetkovska
+Petra Cetkovska,Petra Cetkovska
+Ricardas Berankis,Ricardas Berankis
+R.Berankis,Ricardas Berankis
+Jeremy Chardy,Jeremy Chardy
+J.Chardy,Jeremy Chardy
+Milos Raonic,Milos Raonic
+M.Raonic,Milos Raonic
+Evgeny Donskoy,Evgeny Donskoy
+E.Donskoy,Evgeny Donskoy
+Yanina Wickmayer,Yanina Wickmayer
+Y.Wickmayer,Yanina Wickmayer
+Lukas Rosol,Lukas Rosol
+L.Rosol,Lukas Rosol
+I.Sijsling,Igor Sijsling
+Igor Sijsling,Igor Sijsling
+Marc Gicquel,Marc Gicquel
+M.Gicquel,Marc Gicquel
+Bernard Tomic,Bernard Tomic
+B.Tomic,Bernard Tomic
+J.Janowicz,Jerzy Janowicz
+Jerzy Janowicz,Jerzy Janowicz
+David Goffin,David Goffin
+D.Goffin,David Goffin
+Lleyton Hewitt,Lleyton Hewitt
+L.Hewitt,Lleyton Hewitt
+T.Berdych,Tomas Berdych
+Tomas Berdych,Tomas Berdych
+J.Struff,Jan-Lennard Struff
+Jan-Lennard Struff,Jan-Lennard Struff
+N.Petrova,Nadia Petrova
+Nadia Petrova,Nadia Petrova
+Carlos Berlocq,Carlos Berlocq
+C.Berlocq,Carlos Berlocq
+Ernests Gulbis,Ernests Gulbis
+E.Gulbis,Ernests Gulbis
+D.Tursunov,Dmitry Tursunov
+Dmitry Tursunov,Dmitry Tursunov
+Tamira Paszek,Tamira Paszek
+T.Paszek,Tamira Paszek
+M Koehler,M.Koehler
+M.Koehler,M.Koehler
+F.Lopez,Feliciano Lopez
+Feliciano Lopez,Feliciano Lopez
+Steve Darcis,Steve Darcis
+S.Darcis,Steve Darcis
+M.Russell,Michael Russell
+Michael Russell,Michael Russell
+Robin Haase,Robin Haase
+R.Haase,Robin Haase
+Nicolas Almagro,Nicolas Almagro
+N.Almagro,Nicolas Almagro
+Edouard Roger-Vasselin,Edouard Roger-Vasselin
+E.Roger-Vasselin,Edouard Roger-Vasselin
+P-H.Mathieu,Paul-Henri Mathieu
+Paul-Henri Mathieu,Paul-Henri Mathieu
+S.Bolelli,Simone Bolelli
+Simone Bolelli,Simone Bolelli
+M.Rybarikova,Magdalena Rybarikova
+Magdalena Rybarikova,Magdalena Rybarikova
+Jurgen Melzer,Jurgen Melzer
+J.Melzer,Jurgen Melzer
+Stanislas Wawrinka,Stanislas Wawrinka
+S.Wawrinka,Stanislas Wawrinka
+A.Haider-Maurer,Andreas Haider-Maurer
+Andreas Haider-Maurer,Andreas Haider-Maurer
+S.Johnson,Steve Johnson
+Steve Johnson,Steve Johnson
+Carina Witthoeft,Carina Witthoeft
+C.Witthoeft,Carina Witthoeft
+Julia Glushko,Julia Glushko
+J Glushko,Julia Glushko
+Benjamin Becker,Benjamin Becker
+B.Becker,Benjamin Becker
+F.Fognini,Fabio Fognini
+Fabio Fognini,Fabio Fognini
+Ashleigh Barty,Ashleigh Barty
+A Barty,Ashleigh Barty
+G.Soeda,Go Soeda
+Go Soeda,Go Soeda
+Yen-Hsun Lu,Yen-Hsun Lu
+Y-H.Lu,Yen-Hsun Lu
+Su-Wei Hsieh,Su-Wei Hsieh
+S-W.Hsieh,Su-Wei Hsieh
+Albert Ramos,Albert Ramos
+A.Ramos,Albert Ramos
+S.Voegele,Stefanie Voegele
+Stefanie Voegele,Stefanie Voegele
+Nina Bratchikova,Nina Bratchikova
+N.Bratchikova,Nina Bratchikova
+A.Mannarino,Adrian Mannarino
+Adrian Mannarino,Adrian Mannarino
+R.Stepanek,Radek Stepanek
+Radek Stepanek,Radek Stepanek
+S.Giraldo,Santiago Giraldo
+Santiago Giraldo,Santiago Giraldo
+M.Llodra,Michael Llodra
+Michael Llodra,Michael Llodra
+Tommy Robredo,Tommy Robredo
+T.Robredo,Tommy Robredo
+L.Lacko,Lukas Lacko
+Lukas Lacko,Lukas Lacko
+D Pfizenmaier,Dinah Pfizenmaier
+Dinah Pfizenmaier,Dinah Pfizenmaier
+Rogerio Dutra Silva,Rogerio Dutra Silva
+R.Dutra Silva,Rogerio Dutra Silva
+V.Troicki,Viktor Troicki
+Viktor Troicki,Viktor Troicki
+V.Razzano,Virginie Razzano
+Virginie Razzano,Virginie Razzano
+J.Monaco,Juan Monaco
+Juan Monaco,Juan Monaco
+T.Kamke,Tobias Kamke
+Tobias Kamke,Tobias Kamke
+Olivia Rogowska,Olivia Rogowska
+O Rogowska,Olivia Rogowska
+Blaz Kavcic,Blaz Kavcic
+B.Kavcic,Blaz Kavcic
+Garbine Muguruza,Garbine Muguruza
+G.Muguruza,Garbine Muguruza
+J.Levine,Jesse Levine
+Jesse Levine,Jesse Levine
+Barbora Zahlavova Strycova,Barbora Zahlavova Strycova
+B.Zahlavova Strycova,Barbora Zahlavova Strycova
+Irena Pavlovic,Irena Pavlovic
+K.Edmund,K.Edmund
+Katarzyna Piter,Katarzyna Piter
+Shahar Peer,Shahar Peer
+Gael Monfils,Gael Monfils
+Michael Berrer,Michael Berrer
+Pere Riba,Pere Riba
+Jordan Thompson,Jordan Thompson
+J.Del Potro,J.Del Potro
+Bradley Klahn,Bradley Klahn
+Gilles Muller,Gilles Muller
+Damir Dzumhur,Damir Dzumhur
+Yuliya Beygelzimer,Yuliya Beygelzimer
+Jack Sock,Jack Sock
+Claire Feuerstein,Claire Feuerstein
+J.Konta,J.Konta
+Thomas Fabbiano,Thomas Fabbiano
+Nadiya Kichenok,Nadiya Kichenok
+Katerina Siniakova,Katerina Siniakova
+D.Brown,D.Brown
+Belinda Bencic,Belinda Bencic
+Andrey Golubev,Andrey Golubev
+Hao Chen Tang,Hao Chen Tang
+Casey Dellacqua,Casey Dellacqua
+M.Reid,M.Reid
+M.Camerin,M.Camerin
+Maria Joao Koehler,Maria Joao Koehler
+Polona Hercog,Polona Hercog
+Maximo Gonzalez,Maximo Gonzalez
+Mikhail Kukushkin,Mikhail Kukushkin
+Pablo Carreno Busta,Pablo Carreno Busta
+Donald Young,Donald Young
+Maxime Teixeira,Maxime Teixeira
+V Duval,V Duval
+M.Larcher De Brito,M.Larcher De Brito
+Daniel Munoz-De La Nava,Daniel Munoz-De La Nava
+B.Knittel,B.Knittel
+Tim Smyczek,Tim Smyczek
+Teliana Pereira,Teliana Pereira
+Alison Van Uytvanck,Alison Van Uytvanck
+Brian Baker,Brian Baker
+Aleksandr Nedovyesov,Aleksandr Nedovyesov
+O.Rochus,O.Rochus
+I.Andreev,I.Andreev
+A Wozniak,A Wozniak
+Shuai Zhang,Shuai Zhang
+Pablo Carreno-Busta,Pablo Carreno-Busta
+Shelby Rogers,Shelby Rogers
+Sandra Zahlavova,Sandra Zahlavova
+V Dushevina,V Dushevina
+Vincent Millot,Vincent Millot
+Samuel Groth,Samuel Groth
+Anna Karolina Schmiedlova,Anna Karolina Schmiedlova
+Rhyne Williams,Rhyne Williams
+T.Moore,T.Moore
+J.Ward,J.Ward
+E.Cabeza Candela,E.Cabeza Candela
+Albano Olivetti,Albano Olivetti
+Sachia Vickery,Sachia Vickery
+Nick Kyrgios,Nick Kyrgios
+S.Murray,S.Murray
+Dusan Lajovic,Dusan Lajovic
+Joao Sousa,Joao Sousa
+Zuzana Kucova,Zuzana Kucova
+Vera Zvonareva,Vera Zvonareva
+Federico Delbonis,Federico Delbonis
+Collin Altamirano,Collin Altamirano
+Jiri Vesely,Jiri Vesely
+Somdev Devvarman,Somdev Devvarman
+Thomaz Bellucci,Thomaz Bellucci
+Storm Sanders,Storm Sanders
+Jesse Huta Galung,Jesse Huta Galung
+Nikolay Davydenko,Nikolay Davydenko
+Jimmy Wang,Jimmy Wang
+Yung-Jan Chan,Yung-Jan Chan
+Alejandro Gonzalez,Alejandro Gonzalez
+Ze Zhang,Ze Zhang
+Andrej Martin,Andrej Martin
+Daniel Evans,Daniel Evans
+Di Wu,Di Wu
+Patricia Mayr-Achleitner,Patricia Mayr-Achleitner
+Grace Min,Grace Min
+Frank Dancevic,Frank Dancevic
+Lucas Pouille,Lucas Pouille
+Stephanie Foretz Gacon,Stephanie Foretz Gacon
+Florent Serra,Florent Serra
+A Dulgheru,A Dulgheru
+Thiemo de Bakker,Thiemo de Bakker
+C Wozniack,C Wozniack
+Luksika Kumkhum,Luksika Kumkhum
+B.Reynolds,B.Reynolds
+Tadeja Majeric,Tadeja Majeric
+Jarmila Gajdosova,Jarmila Gajdosova
+David Guez,David Guez
+Peter Gojowczyk,Peter Gojowczyk
+Y-T.Wang,Y-T.Wang
+G.Elias,G.Elias
+Illya Marchenko,Illya Marchenko
+Zarina Diyas,Zarina Diyas
+Pablo Cuevas,Pablo Cuevas
+Alla Kudryavtseva,Alla Kudryavtseva
+Melinda Czink,Melinda Czink
+A.Keothavong,A.Keothavong
+Ivo Karlovic,Ivo Karlovic
+Aravane Rezai,Aravane Rezai
+Irina Falconi,Irina Falconi
+Dominic Thiem,Dominic Thiem
+Filippo Volandri,Filippo Volandri
+A.Glatch,A.Glatch
+E.Birnerova,E.Birnerova
+Juan Martin Del Potro,Juan Martin Del Potro
+Blaz Rola,Blaz Rola
+M.Krajicek,M.Krajicek
+Ana Konjuh,Ana Konjuh
+Thanasi Kokkinakis,Thanasi Kokkinakis
+Dudi Sela,Dudi Sela
