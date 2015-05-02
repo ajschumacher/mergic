@@ -33,9 +33,13 @@ getch = _find_getch()
 
 
 def main():
-    items = {item for item in sys.stdin}
-    for first, second in combinations(items, 2):
-        print Levenshtein.distance(first, second)
+    items = {item.strip() for item in sys.stdin}
+    dist_items = [(Levenshtein.distance(first, second), first, second)
+                  for first, second
+                  in combinations(items, 2)]
+    dist_items.sort()
+    for row in dist_items:
+        print row
 
 if __name__ == '__main__':
     main()
