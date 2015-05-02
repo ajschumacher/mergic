@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import sys
+from itertools import combinations
 import Levenshtein
 
 
@@ -32,10 +33,9 @@ getch = _find_getch()
 
 
 def main():
-    print Levenshtein.distance(sys.argv[1], sys.argv[2])
-    print 'is', sys.argv[1], 'also', sys.argv[2], '?',
-    response = getch()
-    print response
+    items = {item for item in sys.stdin}
+    for first, second in combinations(items, 2):
+        print Levenshtein.distance(first, second)
 
 if __name__ == '__main__':
     main()
