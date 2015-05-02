@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-from itertools import combinations
 import re
-import Levenshtein
 
 
 def initialize(name):
@@ -14,15 +12,14 @@ def initialize(name):
 
 def main():
     items = {item.strip() for item in sys.stdin}
-    dist_items = [(Levenshtein.distance(initialize(first),
-                                        initialize(second)),
-                   first,
-                   second)
-                  for first, second
-                  in combinations(items, 2)]
-    dist_items.sort()
-    for row in dist_items:
-        print row
+    groups = dict()
+    for item in items:
+        groups.setdefault(initialize(item), []).append(item)
+    print "original,uno"
+    for group in sorted(groups.values(), key=len, reverse=True):
+        key = sorted(group, key=len)[-1]
+        for item in group:
+            print "{},{}".format(item, key)
 
 if __name__ == '__main__':
     main()
