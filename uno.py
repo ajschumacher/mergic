@@ -2,6 +2,7 @@
 
 import sys
 from itertools import combinations
+import re
 import Levenshtein
 
 
@@ -32,9 +33,18 @@ def _find_getch():
 getch = _find_getch()
 
 
+def initialize(name):
+    initial = re.match("^[A-Z]", name).group()
+    last = re.search("(?<=[ .])[A-Z].+$", name).group()
+    return "{}. {}".format(initial, last)
+
+
 def main():
     items = {item.strip() for item in sys.stdin}
-    dist_items = [(Levenshtein.distance(first, second), first, second)
+    dist_items = [(Levenshtein.distance(initialize(first),
+                                        initialize(second)),
+                   first,
+                   second)
                   for first, second
                   in combinations(items, 2)]
     dist_items.sort()
