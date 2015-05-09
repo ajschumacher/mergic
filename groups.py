@@ -24,8 +24,8 @@ for one, other in combinations(sets, 2):
     links_at.setdefault(distance(one, other), []).append((one, other))
 
 cutoffs = sorted(links_at)
-# store: (cutoff, {size: number_of_em}
-tables = {cutoffs[0] - 1: Counter(len(x) for x in sets.values())}
+tables = {cutoffs[0] - 1: {1: len(sets)}}
+# TODO: stop search after using all items
 for cutoff in cutoffs:
     # alternative way to grow groups: on a per-group basis
     # rather than globally changing cutoff, could just grow
