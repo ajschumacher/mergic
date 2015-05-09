@@ -5,6 +5,15 @@ from collections import Counter
 from uno import initialize
 
 
+def flatten(t):
+    for el in t:
+        if isinstance(el, tuple):
+            for sub in flatten(el):
+                yield sub
+        else:
+            yield el
+
+
 data_file_name = 'names_all.txt'
 # data_file_name = 'RLdata500.csv'
 with open(data_file_name) as f:
