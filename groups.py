@@ -8,7 +8,7 @@ from uno import initialize
 data_file_name = 'names_all.txt'
 # data_file_name = 'RLdata500.csv'
 with open(data_file_name) as f:
-    sets = {name.strip(): {name.strip()} for name in f.readlines()}
+    sets = {name.strip(): (name.strip(),) for name in f.readlines()}
 
 # sets = {a: {a} for a in ['aa', 'ab', 'ac', 'ad']}
 
@@ -34,7 +34,7 @@ for cutoff in cutoffs:
         if sets[one] is sets[other]:
             continue
         else:
-            union = sets[one] | sets[other]
+            union = sets[one] + sets[other]
             for thing in union:
                 sets[thing] = union
     unique_sets = []
