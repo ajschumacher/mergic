@@ -68,6 +68,40 @@ def diff(args):
                      separators=(',', ': ')).encode('utf-8')
 
 
+def apply_diff(args):
+    original = json.loads(args.partition.read())
+    _check(original)
+    changes = json.loads(args.patch.read())
+
+    mixed_from = set()
+    mixed_to = set()
+    for key, values in changes.items():
+        if original.get(key) == values:
+            # this shouldn't happen, but still...
+            del(original[key])
+        else:
+            mixed_to.update(values)
+            to_find = mixed_to - mixed_from
+            for key_from, values_from in original.items():
+                values_from = set(values_from)
+                if to_find & values_from:
+                    mixed_from.update(values_from)
+                    del(original[key_from])
+            not_found = to_find - mixed_from
+            if not_found:
+                raise ValueError(not_found)
+    if mixed_from != mixed_to:
+        not_assigned = mixed_from - mixed_to
+        raise ValueError(not_assigned)
+    # TODO, possibly:
+    # make the order that keys come out nicer
+    original.update(changes)
+    print json.dumps(original,
+                     ensure_ascii=False,
+                     indent=4,
+                     separators=(',', ': ')).encode('utf-8')
+
+
 def table(args):
     data = json.loads(args.infile.read())
     _check(data)
@@ -100,6 +134,16 @@ p_diff.add_argument('second',
                     help='a JSON partition',
                     type=argparse.FileType('r'))
 p_diff.set_defaults(func=diff)
+
+p_apply = subparsers.add_parser('apply',
+                                help='apply a patch to a JSON partition')
+p_apply.add_argument('partition',
+                     help='a JSON partition',
+                     type=argparse.FileType('r'))
+p_apply.add_argument('patch',
+                     help='a JSON partition patch',
+                     type=argparse.FileType('r'))
+p_apply.set_defaults(func=apply_diff)
 
 p_table = subparsers.add_parser('table',
                                 help='make merge table from JSON partition')

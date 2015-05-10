@@ -26,7 +26,7 @@ You could proceed directly, but there are also diffing tools! Generate a diff:
 You can apply a diff to reconstruct an edited version:
 
 ```bash
-./partition_apply_diff.py partition.json partition_diff.json > partition_rebuilt.json
+./unom.py apply partition.json partition_diff.json > partition_rebuilt.json
 ```
 
 Now if you `unom.py diff` the files `partition_edited.json` and `partition_rebuilt.json` the result should just be `{}` (no difference).
