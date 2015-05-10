@@ -1,14 +1,20 @@
 #!/usr/bin/env python
 
+import re
 import json
 import Levenshtein
 from itertools import combinations
 from collections import Counter
 from collections import OrderedDict
-from uno import initialize
 
 data_file_name = 'names_all.txt'
 # data_file_name = 'RLdata500.csv'
+
+
+def initialize(name):
+    initial = re.match("^[A-Z]", name).group()
+    last = re.search("(?<=[ .])[A-Z].+$", name).group()
+    return "{}. {}".format(initial, last)
 
 
 def link_items(belongings, links):
