@@ -35,12 +35,13 @@ def check(args):
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers()
 
-p_verify = subparsers.add_parser('check',
-                                 help='check validiy of JSON partition')
-p_verify.add_argument('infile', nargs='?',
-                      type=argparse.FileType('r'),
-                      default=sys.stdin)
-p_verify.set_defaults(func=check)
+p_check = subparsers.add_parser('check',
+                                help='check validiy of JSON partition')
+p_check.add_argument('infile', nargs='?',
+                     type=argparse.FileType('r'),
+                     default=sys.stdin)
+p_check.set_defaults(func=check)
+
 
 args = parser.parse_args()
 args.func(args)
