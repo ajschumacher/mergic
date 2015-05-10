@@ -13,7 +13,7 @@ Edit the partition until it's good. Save it as `partition_edited.json`.
 You can check that your partition is valid and see a cute summary:
 
 ```bash
-cat partition_edited.json | ./partition_verify.py
+./unom.py check partition_edited.json
 # 669 items in 354 groups
 ```
 
