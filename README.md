@@ -40,6 +40,31 @@ cat partition_edited.json | ./partition_to_table.py > partition.csv
 Now the file `partition.csv` has two columns, `original` and `unom`, where `original` contains all the values that appeared in the original data and `unom` contains the deduplicated keys. You can join this on to your original data and go to town.
 
 
+## Distances
+
+Here are some popular distances and how to do them with Python:
+
+ * [Levenshtein string edit distance](http://en.wikipedia.org/wiki/Levenshtein_distance): The classic! It has many implementations; one of them is [python-Levenshtein](http://www.coli.uni-saarland.de/courses/LT1/2011/slides/Python-Levenshtein.html).
+
+```python
+# pip install python-Levenshtein
+import Levenshtein
+Levenshtein.distance("fuzzy", "wuzzy")
+# 1
+```
+
+ * SeatGeek's [fuzzywuzzy](https://github.com/seatgeek/fuzzywuzzy): As described in a [blog post](http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/), some distance variants that people have found to work well in practice. Its responses are phrased as integer percent similarities; one way to make a distance is to subtract from 100.
+
+```python
+# pip install fuzzywuzzy
+from fuzzywuzzy import fuzz
+100 - fuzz.ratio("Levensthein", "Leviathan")
+# 50
+```
+
+There are a ton of distances, even just within the two packages mentioned! You can also roll your own! (This is encouraged!)
+
+
 ## Old stuff
 
 To produce the test data from its source:

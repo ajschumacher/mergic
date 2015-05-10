@@ -1,6 +1,7 @@
+#!/usr/bin/env python
+
 import json
 import Levenshtein
-from fuzzywuzzy import fuzz
 from itertools import combinations
 from collections import Counter
 from collections import OrderedDict
@@ -22,11 +23,6 @@ def link_items(belongings, links):
 with open(data_file_name) as f:
     sets = {name.strip(): (name.strip(),) for name in f.readlines()}
 
-# distance = Levenshtein.distance
-# distance = lambda x, y: 100 - fuzz.ratio(x, y)
-# distance = lambda x, y: 100 - fuzz.partial_ratio(x, y)
-# distance = lambda x, y: 100 - fuzz.token_sort_ratio(x, y)
-# distance = lambda x, y: 100 - fuzz.token_set_ratio(x, y)
 distance = lambda x, y: Levenshtein.distance(initialize(x), initialize(y))
 links_at = {}
 for one, other in combinations(sets, 2):
