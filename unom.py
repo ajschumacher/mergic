@@ -32,6 +32,7 @@ def check(args):
     n = _check(data)
     print "{} items in {} groups".format(n, len(data))
 
+
 def table(args):
     data = json.loads(args.infile.read())
     _check(data)
