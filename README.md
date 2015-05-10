@@ -1,5 +1,47 @@
 # uno
 
+Current suite of hacky scripts:
+
+The distance calculation, cutoff evaluation, and partition creation are currently all in (and hard-coded with an input file, cutoff of 2, etc.) `parition_make.py`.
+
+```bash
+./partition_make.py > partition.json
+```
+
+Edit the partition until it's good. Save it as `partition_edited.json`.
+
+You can check that your partition is valid and see a cute summary:
+
+```bash
+cat partition_edited.json | ./partition_verify.py
+# 669 items in 354 groups
+```
+
+You could proceed directly, but there are also diffing tools! Generate a diff:
+
+```bash
+./partition_diff.py partition.json partition_edited.json > partition_diff.json
+```
+
+You can apply a diff to reconstruct an edited version:
+
+```bash
+./partition_apply_diff.py partition.json partition_diff.json > partition_rebuilt.json
+```
+
+Now if you `partition_diff.py` the files `partition_edited.json` and `partition_rebuilt.json` the result should just be `{}` (no difference).
+
+To generate a CSV merge table that you'll be able to use with any other tool:
+
+```bash
+cat partition_edited.json | ./partition_to_table.py > partition.csv
+```
+
+Now the file `partition.csv` has two columns, `original` and `unom`, where `original` contains all the values that appeared in the original data and `unom` contains the deduplicated keys. You can join this on to your original data and go to town.
+
+
+## Old stuff
+
 To produce the test data from its source:
 
 ```bash
