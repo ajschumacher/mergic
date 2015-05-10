@@ -3,6 +3,7 @@
 import argparse
 import sys
 import json
+import csv
 
 
 def _check(partition):
@@ -31,6 +32,17 @@ def check(args):
     n = _check(data)
     print "{} items in {} groups".format(n, len(data))
 
+def table(args):
+    data = json.loads(args.infile.read())
+    _check(data)
+    writer = csv.writer(sys.stdout)
+    writer.writerow(["original", "unom"])
+    for key, values in data.items():
+        key = key.encode('utf-8')
+        for value in values:
+            value = value.encode('utf-8')
+            writer.writerow([value, key])
+
 
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers()
@@ -38,9 +50,18 @@ subparsers = parser.add_subparsers()
 p_check = subparsers.add_parser('check',
                                 help='check validiy of JSON partition')
 p_check.add_argument('infile', nargs='?',
+                     help='a JSON partition',
                      type=argparse.FileType('r'),
                      default=sys.stdin)
 p_check.set_defaults(func=check)
+
+p_table = subparsers.add_parser('table',
+                                help='make merge table from JSON partition')
+p_table.add_argument('infile', nargs='?',
+                     help='a JSON partition',
+                     type=argparse.FileType('r'),
+                     default=sys.stdin)
+p_table.set_defaults(func=table)
 
 
 args = parser.parse_args()

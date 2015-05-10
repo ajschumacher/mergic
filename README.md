@@ -34,7 +34,7 @@ Now if you `partition_diff.py` the files `partition_edited.json` and `partition_
 To generate a CSV merge table that you'll be able to use with any other tool:
 
 ```bash
-cat partition_edited.json | ./partition_to_table.py > partition.csv
+./unom.py table partition_edited.json > partition.csv
 ```
 
 Now the file `partition.csv` has two columns, `original` and `unom`, where `original` contains all the values that appeared in the original data and `unom` contains the deduplicated keys. You can join this on to your original data and go to town.
