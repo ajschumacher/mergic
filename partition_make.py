@@ -1,20 +1,13 @@
 #!/usr/bin/env python
 
-import re
 import json
-import Levenshtein
+from difflib import SequenceMatcher
 from itertools import combinations
 from collections import Counter
 from collections import OrderedDict
 
 data_file_name = 'names_all.txt'
 # data_file_name = 'RLdata500.csv'
-
-
-def initialize(name):
-    initial = re.match("^[A-Z]", name).group()
-    last = re.search("(?<=[ .])[A-Z].+$", name).group()
-    return "{}. {}".format(initial, last)
 
 
 def link_items(belongings, links):
@@ -29,7 +22,10 @@ def link_items(belongings, links):
 with open(data_file_name) as f:
     sets = {name.strip(): (name.strip(),) for name in f.readlines()}
 
-distance = lambda x, y: Levenshtein.distance(initialize(x), initialize(y))
+
+def distance(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
 links_at = {}
 for one, other in combinations(sets, 2):
     links_at.setdefault(distance(one, other), []).append((one, other))
