@@ -20,7 +20,7 @@ You can check that your partition is valid and see a cute summary:
 You could proceed directly, but there are also diffing tools! Generate a diff:
 
 ```bash
-./partition_diff.py partition.json partition_edited.json > partition_diff.json
+./unom.py diff partition.json partition_edited.json > partition_diff.json
 ```
 
 You can apply a diff to reconstruct an edited version:
@@ -29,7 +29,7 @@ You can apply a diff to reconstruct an edited version:
 ./partition_apply_diff.py partition.json partition_diff.json > partition_rebuilt.json
 ```
 
-Now if you `partition_diff.py` the files `partition_edited.json` and `partition_rebuilt.json` the result should just be `{}` (no difference).
+Now if you `unom.py diff` the files `partition_edited.json` and `partition_rebuilt.json` the result should just be `{}` (no difference).
 
 To generate a CSV merge table that you'll be able to use with any other tool:
 
