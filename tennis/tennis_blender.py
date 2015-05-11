@@ -17,5 +17,5 @@ def distance(x, y):
     return Levenshtein.distance(x, y)
 
 
-blender = mergic.Blender(distance)
+blender = mergic.Blender(distance, 'append')
 blender.script()

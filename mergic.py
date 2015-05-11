@@ -131,14 +131,17 @@ def table(args):
 
 class Blender():
 
-    def stock_distance(a, b):
-        return 1 - SequenceMatcher(None, a, b).ratio()
-
-    def __init__(self, distance='stock'):
+    def __init__(self, distance='stock', key_method='longest'):
         if distance == 'stock':
-            self.distance = self.stock_distance
+            self.distance = lambda a, b: 1 - SequenceMatcher(None, a, b).ratio()
         else:
             self.distance = distance
+        if key_method == 'longest':
+            self.key_method = lambda x: max(sorted(x), key=len)
+        elif key_method == 'append':
+            self.key_method = lambda x: "|".join(x)
+        else:
+            self.key_method = key_method
 
     def make(self, args):
         items = [item.strip() for item in args.infile.readlines()]
@@ -183,7 +186,7 @@ class Blender():
         unique_sets.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
         result = OrderedDict()
         for item in unique_sets:
-            result[max(item, key=len)] = list(item)
+            result[self.key_method(item)] = list(item)
 
         print json.dumps(result, indent=4, separators=(',', ': '))
 
