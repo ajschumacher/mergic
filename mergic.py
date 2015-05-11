@@ -94,7 +94,7 @@ def make(args):
 def check(args):
     # With JSON there is a risk of duplicate keys;
     # the last one will win.
-    data = json.loads(args.infile.read())
+    data = json.loads(args.partition.read())
     n = _check(data)
     print "{} items in {} groups".format(n, len(data))
 
@@ -169,7 +169,7 @@ def apply_diff(args):
 
 
 def table(args):
-    data = json.loads(args.infile.read())
+    data = json.loads(args.partition.read())
     _check(data)
     writer = csv.writer(sys.stdout)
     writer.writerow(["original", "mergic"])
@@ -198,10 +198,10 @@ def _run_as_script():
     p_make.set_defaults(func=make)
 
     p_check = subparsers.add_parser('check',
-                                    help='check validiy of JSON partition')
-    p_check.add_argument('infile',
+                                    help='check validity of JSON partition')
+    p_check.add_argument('partition',
                          nargs='?',
-                         help='a JSON partition',
+                         help='a JSON partition file',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
     p_check.set_defaults(func=check)
@@ -209,28 +209,28 @@ def _run_as_script():
     p_diff = subparsers.add_parser('diff',
                                    help='diff two JSON partitions')
     p_diff.add_argument('first',
-                        help='a JSON partition',
+                        help='a JSON partition file',
                         type=argparse.FileType('r'))
     p_diff.add_argument('second',
-                        help='a JSON partition',
+                        help='a JSON partition file',
                         type=argparse.FileType('r'))
     p_diff.set_defaults(func=diff)
 
     p_apply = subparsers.add_parser('apply',
                                     help='apply a patch to a JSON partition')
     p_apply.add_argument('partition',
-                         help='a JSON partition',
+                         help='a JSON partition file',
                          type=argparse.FileType('r'))
     p_apply.add_argument('patch',
-                         help='a JSON partition patch',
+                         help='a JSON partition patch file',
                          type=argparse.FileType('r'))
     p_apply.set_defaults(func=apply_diff)
 
     p_table = subparsers.add_parser('table',
                                     help='make merge table from JSON partition')
-    p_table.add_argument('infile',
+    p_table.add_argument('partition',
                          nargs='?',
-                         help='a JSON partition',
+                         help='a JSON partition file',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
     p_table.set_defaults(func=table)
