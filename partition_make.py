@@ -44,6 +44,9 @@ for cutoff in cutoffs:
             unique_sets.append(a_set)
     tables[cutoff] = (Counter(len(x) for x in unique_sets),
                       sum(len(x)*(len(x)-1)/2 for x in unique_sets))
+
+# this is really the divide between `explore` and `make`
+
 ordered_items = sets.values()[0]
 
 # NOT DRY (copied from above)

@@ -4,6 +4,11 @@ import argparse
 import sys
 import json
 import csv
+from difflib import SequenceMatcher
+from itertools import combinations
+from collections import Counter
+from collections import OrderedDict
+from pprint import pprint
 
 
 def _check(partition):
@@ -23,6 +28,47 @@ def _check(partition):
         # now add to running list
         all_items.update(values)
     return len(all_items)
+
+
+def _link_items(belongings, links):
+    for one, other in links:
+        if belongings[one] is belongings[other]:
+            continue
+        else:
+            union = belongings[one] + belongings[other]
+            for thing in union:
+                belongings[thing] = union
+
+
+def make(args):
+    sets = {name.strip(): (name.strip(),) for name in args.infile.readlines()}
+
+    def distance(a, b):
+        return 1 - SequenceMatcher(None, a, b).ratio()
+
+    links_at = {}
+    for one, other in combinations(sets, 2):
+        links_at.setdefault(distance(one, other), []).append((one, other))
+
+    cutoffs = sorted(links_at)
+    tables = [(len(sets), 1, 0, cutoffs[0] - 1)]
+    # TODO: stop search after using all items
+    for cutoff in cutoffs:
+        # alternative way to grow groups: on a per-group basis
+        # rather than globally changing cutoff, could just grow
+        # groups until they reach some "satisfactory" size
+        _link_items(sets, links_at[cutoff])
+        unique_sets = []
+        for a_set in sets.values():
+            if a_set not in unique_sets:
+                unique_sets.append(a_set)
+        c = Counter(len(x) for x in unique_sets)
+        tables.append((sum(c.values()),  # number of groups
+                       max(c.keys()),    # largest group
+                       sum(len(x)*(len(x)-1)/2 for x in unique_sets),
+                       cutoff))
+    print "# groups, largest group, comparisons, cutoff"
+    pprint(tables)
 
 
 def check(args):
@@ -117,6 +163,14 @@ def table(args):
 def _run_as_script():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
+
+    p_make = subparsers.add_parser('make',
+                                   help='make a JSON partition from data')
+    p_make.add_argument('infile', nargs='?',
+                         help='lines of text to make a partition for',
+                         type=argparse.FileType('r'),
+                         default=sys.stdin)
+    p_make.set_defaults(func=make)
 
     p_check = subparsers.add_parser('check',
                                     help='check validiy of JSON partition')
