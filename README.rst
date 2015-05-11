@@ -7,7 +7,7 @@ Installation:
 
    pip install mergic
 
-The ``mergic`` package provides a command-line script called ``mergic``, but a major strength of ``mergic`` is that it allows you to easily use custom distance functions. Making a custom ``mergic`` script is as easy as:
+The ``mergic`` package provides a command-line script called ``mergic`` that uses Python's built-in ``difflib.SequenceMatcher.ratio()`` for calculating string distances, but a major strength of ``mergic`` is that it enables easy customization of the distance function via the ``mergic.Blender`` class. Making a custom ``mergic`` script is as easy as:
 
 .. code:: python
 
