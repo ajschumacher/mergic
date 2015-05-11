@@ -10,9 +10,12 @@ def initialize(name):
     last = re.search("(?<=[ .])[A-Z].+$", name).group()
     return "{}. {}".format(initial, last)
 
-distance = lambda x, y: Levenshtein.distance(initialize(x), initialize(y))
+
+def distance(x, y):
+    x = initialize(x)
+    y = initialize(y)
+    return Levenshtein.distance(x, y)
 
 
-# TODO: actually use `distance`
 blender = mergic.Blender(distance)
 blender.script()
