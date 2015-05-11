@@ -41,7 +41,8 @@ def _link_items(belongings, links):
 
 
 def make(args):
-    sets = {name.strip(): (name.strip(),) for name in args.infile.readlines()}
+    items = [item.strip() for item in args.infile.readlines()]
+    sets = {item: (item,) for item in items}
 
     def distance(a, b):
         return 1 - SequenceMatcher(None, a, b).ratio()
@@ -67,8 +68,27 @@ def make(args):
                        max(c.keys()),    # largest group
                        sum(len(x)*(len(x)-1)/2 for x in unique_sets),
                        cutoff))
-    print "# groups, largest group, comparisons, cutoff"
-    pprint(tables)
+    if args.cutoff is None:
+        print "# groups, largest group, comparisons, cutoff"
+        pprint(tables)
+        return None
+
+    ordered_items = sets.values()[0]
+
+    # NOT DRY (copied from above)
+    sets = {item: (item,) for item in items}
+    for cutoff in [x for x in cutoffs if x <= args.cutoff]:
+        _link_items(sets, links_at[cutoff])
+    unique_sets = []
+    for a_set in sets.values():
+        if a_set not in unique_sets:
+            unique_sets.append(a_set)
+    unique_sets.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
+    result = OrderedDict()
+    for item in unique_sets:
+        result[max(item, key=len)] = list(item)
+
+    print json.dumps(result, indent=4, separators=(',', ': '))
 
 
 def check(args):

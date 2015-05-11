@@ -2,10 +2,14 @@
 
 Current suite of hacky scripts:
 
-The distance calculation, cutoff evaluation, and partition creation are currently all in (and hard-coded with an input file, cutoff of 2, etc.) `parition_make.py`.
+The distance calculation, cutoff evaluation, and partition creation are currently all in `unom.py make`:
 
 ```bash
-./partition_make.py > partition.json
+# see all the possible partitions by their statistics
+./unom.py make names_all.txt
+
+# make a partition using a cutoff of 0.303
+./unom.py make 0.303 > partition.json
 ```
 
 Edit the partition until it's good. Save it as `partition_edited.json`.
