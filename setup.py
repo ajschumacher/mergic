@@ -13,6 +13,6 @@ setup(name='mergic',
       author='Aaron Schumacher',
       author_email='ajschumacher@gmail.com',
       url='https://github.com/ajschumacher/mergic',
-      download_url='https://github.com/ajschumacher/mergic/tarball/0.0.1',
-      version='0.0.1',
+      download_url='https://github.com/ajschumacher/mergic/tarball/0.0.2',
+      version='0.0.2',
       entry_points={'console_scripts': ['mergic = mergic:script']})
