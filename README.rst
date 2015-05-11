@@ -21,7 +21,7 @@ The ``mergic`` package provides a command-line script called ``mergic`` that use
    blender = mergic.Blender(distance)
    blender.script()
 
-Now ``custom_mergic.py`` can be used just like the standard ``mergic`` script! You can also use a custom function for generating the keys that values are de-duped to; by default ``mergic.Blender`` will use the first longest of the matched values in sorted order.
+Now ``custom_mergic.py`` can be used just like the standard ``mergic`` script! You can also use a custom function for generating the keys that values are de-duped to; by default ``mergic.Blender`` will use the first longest of a group's values in sorted order.
 
 The distance calculation, cutoff evaluation, and partition creation are
 currently all in ``mergic make``:
