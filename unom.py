@@ -166,18 +166,21 @@ def _run_as_script():
 
     p_make = subparsers.add_parser('make',
                                    help='make a JSON partition from data')
-    p_make.add_argument('infile', nargs='?',
-                         help='lines of text to make a partition for',
-                         type=argparse.FileType('r'),
-                         default=sys.stdin)
-    p_make.add_argument('cutoff', nargs='?',
+    p_make.add_argument('infile',
+                        nargs='?',
+                        help='lines of text to make a partition for',
+                        type=argparse.FileType('r'),
+                        default=sys.stdin)
+    p_make.add_argument('cutoff',
+                        nargs='?',
                         help="cutoff for partition (if present)",
                         type=float)
     p_make.set_defaults(func=make)
 
     p_check = subparsers.add_parser('check',
                                     help='check validiy of JSON partition')
-    p_check.add_argument('infile', nargs='?',
+    p_check.add_argument('infile',
+                         nargs='?',
                          help='a JSON partition',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
@@ -205,7 +208,8 @@ def _run_as_script():
 
     p_table = subparsers.add_parser('table',
                                     help='make merge table from JSON partition')
-    p_table.add_argument('infile', nargs='?',
+    p_table.add_argument('infile',
+                         nargs='?',
                          help='a JSON partition',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
