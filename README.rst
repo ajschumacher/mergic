@@ -121,31 +121,6 @@ Thoughts so far:
 -  Can I use tSNE (or similar) to get a visualization based just on a
    distance matrix?
 
-Notes from doing the manual match for tennis (one hour):
-
-::
-
-
-    Wozniacki! A Wozniak? C Wozniack?
-     "C Wozniack" a typo for the Dane
-     "A Wozniak" Canadian
-
-    Pliskova sisters
-     but at least only Carolina was in the 2013 US Open
-
-    THE KUZNETSOVAS ><
-     one American, one Russian, and they were both in Wimbledon
-     ... as "A.Kuznetsov"
-     but Andrey played twice
-     so in "Wimbledon-men-2013.csv",
-     "A.Kuznetsov,I.Sijsling," should be "Alex Kuznetsov,I.Sijsling,"
-
-    B.Becker is Benjamin, not Brian
-
-
-    cool! found the Juan Martin Del Potro fix! because they were near each other!
-
-    recognized Karolina Schmiedlova as long name that could partially match
 
 For posterity: look how short this is!
 
