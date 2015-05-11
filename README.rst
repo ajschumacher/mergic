@@ -1,7 +1,26 @@
 mergic: workflow support for reproducible deduplication and merging
 ===================================================================
 
-With the ``mergic.Blender``:
+Installation:
+
+.. code:: bash
+
+   pip install mergic
+
+The ``mergic`` package provides a command-line script called ``mergic``, but a major strength of ``mergic`` is that it allows you to easily use custom distance functions. Making a custom ``mergic`` script is as easy as:
+
+.. code:: python
+
+   # custom_mergic.py
+   import mergic
+
+   def distance(a, b):  # Any custom distance you want to try! e.g.,
+       return max(i for i, (x, y) in enumerate(zip(a, b)) if x == y)
+
+   blender = mergic.Blender(distance)
+   blender.script()
+
+Now ``custom_mergic.py`` can be used just like the standard ``mergic`` script! You can also use a custom function for generating the keys that values are de-duped to; by default ``mergic.Blender`` will use the first longest of the matched values in sorted order.
 
 The distance calculation, cutoff evaluation, and partition creation are
 currently all in ``mergic make``:
