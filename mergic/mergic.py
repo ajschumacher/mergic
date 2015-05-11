@@ -249,9 +249,9 @@ class Blender():
         args.func(args)
 
 
-def main():
+def script():
     blender = Blender()
     blender.script()
 
 if __name__ == '__main__':
-    main()
+    script()

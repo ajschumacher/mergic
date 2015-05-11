@@ -1,4 +1,5 @@
 *.pyc
+mergic.egg-info/
 AusOpen-men-2013.csv
 AusOpen-women-2013.csv
 FrenchOpen-men-2013.csv
