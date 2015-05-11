@@ -1,7 +1,7 @@
 mergic: workflow support for reproducible deduplication and merging
 ===================================================================
 
-With the mergic blender:
+With the ``mergic.Blender``:
 
 The distance calculation, cutoff evaluation, and partition creation are
 currently all in ``mergic.py make``:
