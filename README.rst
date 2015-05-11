@@ -4,15 +4,15 @@ mergic: workflow support for reproducible deduplication and merging
 With the ``mergic.Blender``:
 
 The distance calculation, cutoff evaluation, and partition creation are
-currently all in ``mergic.py make``:
+currently all in ``mergic make``:
 
 .. code:: bash
 
     # see all the possible partitions by their statistics
-    ./mergic.py make names_all.txt
+    mergic make names_all.txt
 
     # make a partition using a cutoff of 0.303
-    ./mergic.py make 0.303 > partition.json
+    mergic make 0.303 > partition.json
 
 Edit the partition until it's good. Save it as
 ``partition_edited.json``.
@@ -21,7 +21,7 @@ You can check that your partition is valid and see a cute summary:
 
 .. code:: bash
 
-    ./mergic.py check partition_edited.json
+    mergic check partition_edited.json
     # 669 items in 354 groups
 
 You could proceed directly, but there are also diffing tools! Generate a
@@ -29,15 +29,15 @@ diff:
 
 .. code:: bash
 
-    ./mergic.py diff partition.json partition_edited.json > partition_diff.json
+    mergic diff partition.json partition_edited.json > partition_diff.json
 
 You can apply a diff to reconstruct an edited version:
 
 .. code:: bash
 
-    ./mergic.py apply partition.json partition_diff.json > partition_rebuilt.json
+    mergic apply partition.json partition_diff.json > partition_rebuilt.json
 
-Now if you ``mergic.py diff`` the files ``partition_edited.json`` and
+Now if you ``mergic diff`` the files ``partition_edited.json`` and
 ``partition_rebuilt.json`` the result should just be ``{}`` (no
 difference).
 
@@ -46,7 +46,7 @@ tool:
 
 .. code:: bash
 
-    ./mergic.py table partition_edited.json > partition.csv
+    mergic table partition_edited.json > partition.csv
 
 Now the file ``partition.csv`` has two columns, ``original`` and
 ``mergic``, where ``original`` contains all the values that appeared in
