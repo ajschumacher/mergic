@@ -40,57 +40,6 @@ def _link_items(belongings, links):
                 belongings[thing] = union
 
 
-def make(args):
-    items = [item.strip() for item in args.infile.readlines()]
-    sets = {item: (item,) for item in items}
-
-    def distance(a, b):
-        return 1 - SequenceMatcher(None, a, b).ratio()
-
-    links_at = {}
-    for one, other in combinations(sets, 2):
-        links_at.setdefault(distance(one, other), []).append((one, other))
-
-    cutoffs = sorted(links_at)
-    tables = [(len(sets), 1, 0, cutoffs[0] - 1)]
-    # TODO: stop search after using all items
-    for cutoff in cutoffs:
-        # alternative way to grow groups: on a per-group basis
-        # rather than globally changing cutoff, could just grow
-        # groups until they reach some "satisfactory" size
-        _link_items(sets, links_at[cutoff])
-        unique_sets = []
-        for a_set in sets.values():
-            if a_set not in unique_sets:
-                unique_sets.append(a_set)
-        c = Counter(len(x) for x in unique_sets)
-        tables.append((sum(c.values()),  # number of groups
-                       max(c.keys()),    # largest group
-                       sum(len(x)*(len(x)-1)/2 for x in unique_sets),
-                       cutoff))
-    if args.cutoff is None:
-        print "# groups, largest group, comparisons, cutoff"
-        pprint(tables)
-        return None
-
-    ordered_items = sets.values()[0]
-
-    # NOT DRY (copied from above)
-    sets = {item: (item,) for item in items}
-    for cutoff in [x for x in cutoffs if x <= args.cutoff]:
-        _link_items(sets, links_at[cutoff])
-    unique_sets = []
-    for a_set in sets.values():
-        if a_set not in unique_sets:
-            unique_sets.append(a_set)
-    unique_sets.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
-    result = OrderedDict()
-    for item in unique_sets:
-        result[max(item, key=len)] = list(item)
-
-    print json.dumps(result, indent=4, separators=(',', ': '))
-
-
 def check(args):
     # With JSON there is a risk of duplicate keys;
     # the last one will win.
@@ -180,68 +129,121 @@ def table(args):
             writer.writerow([value, key])
 
 
-def _run_as_script():
-    parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers()
-
-    p_make = subparsers.add_parser('make',
-                                   help='make a JSON partition from data')
-    p_make.add_argument('infile',
-                        nargs='?',
-                        help='lines of text to make a partition for',
-                        type=argparse.FileType('r'),
-                        default=sys.stdin)
-    p_make.add_argument('cutoff',
-                        nargs='?',
-                        help="cutoff for partition (if present)",
-                        type=float)
-    p_make.set_defaults(func=make)
-
-    p_check = subparsers.add_parser('check',
-                                    help='check validity of JSON partition')
-    p_check.add_argument('partition',
-                         nargs='?',
-                         help='a JSON partition file',
-                         type=argparse.FileType('r'),
-                         default=sys.stdin)
-    p_check.set_defaults(func=check)
-
-    p_diff = subparsers.add_parser('diff',
-                                   help='diff two JSON partitions')
-    p_diff.add_argument('first',
-                        help='a JSON partition file',
-                        type=argparse.FileType('r'))
-    p_diff.add_argument('second',
-                        help='a JSON partition file',
-                        type=argparse.FileType('r'))
-    p_diff.set_defaults(func=diff)
-
-    p_apply = subparsers.add_parser('apply',
-                                    help='apply a patch to a JSON partition')
-    p_apply.add_argument('partition',
-                         help='a JSON partition file',
-                         type=argparse.FileType('r'))
-    p_apply.add_argument('patch',
-                         help='a JSON partition patch file',
-                         type=argparse.FileType('r'))
-    p_apply.set_defaults(func=apply_diff)
-
-    p_table = subparsers.add_parser('table',
-                                    help='make merge table from JSON partition')
-    p_table.add_argument('partition',
-                         nargs='?',
-                         help='a JSON partition file',
-                         type=argparse.FileType('r'),
-                         default=sys.stdin)
-    p_table.set_defaults(func=table)
-
-    args = parser.parse_args()
-    args.func(args)
-
-
 class Blender():
+
+    def stock_distance(a, b):
+        return 1 - SequenceMatcher(None, a, b).ratio()
+
+    def __init__(self, distance='stock'):
+        if distance == 'stock':
+            self.distance = self.stock_distance
+        else:
+            self.distance = distance
+
+    def make(self, args):
+        items = [item.strip() for item in args.infile.readlines()]
+        sets = {item: (item,) for item in items}
+
+        links_at = {}
+        for one, other in combinations(sets, 2):
+            links_at.setdefault(self.distance(one, other), []).append((one, other))
+
+        cutoffs = sorted(links_at)
+        tables = [(len(sets), 1, 0, cutoffs[0] - 1)]
+        # TODO: stop search after using all items
+        for cutoff in cutoffs:
+            # alternative way to grow groups: on a per-group basis
+            # rather than globally changing cutoff, could just grow
+            # groups until they reach some "satisfactory" size
+            _link_items(sets, links_at[cutoff])
+            unique_sets = []
+            for a_set in sets.values():
+                if a_set not in unique_sets:
+                    unique_sets.append(a_set)
+            c = Counter(len(x) for x in unique_sets)
+            tables.append((sum(c.values()),  # number of groups
+                           max(c.keys()),    # largest group
+                           sum(len(x)*(len(x)-1)/2 for x in unique_sets),
+                           cutoff))
+        if args.cutoff is None:
+            print "# groups, largest group, comparisons, cutoff"
+            pprint(tables)
+            return None
+
+        ordered_items = sets.values()[0]
+
+        # NOT DRY (copied from above)
+        sets = {item: (item,) for item in items}
+        for cutoff in [x for x in cutoffs if x <= args.cutoff]:
+            _link_items(sets, links_at[cutoff])
+        unique_sets = []
+        for a_set in sets.values():
+            if a_set not in unique_sets:
+                unique_sets.append(a_set)
+        unique_sets.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
+        result = OrderedDict()
+        for item in unique_sets:
+            result[max(item, key=len)] = list(item)
+
+        print json.dumps(result, indent=4, separators=(',', ': '))
+
     def script(self):
-        _run_as_script()
+        parser = argparse.ArgumentParser()
+        subparsers = parser.add_subparsers()
+
+        p_make = subparsers.add_parser('make',
+                                       help='make a JSON partition from data')
+        p_make.add_argument('infile',
+                            nargs='?',
+                            help='lines of text to make a partition for',
+                            type=argparse.FileType('r'),
+                            default=sys.stdin)
+        p_make.add_argument('cutoff',
+                            nargs='?',
+                            help="cutoff for partition (if present)",
+                            type=float)
+        p_make.set_defaults(func=self.make)
+
+        p_check = subparsers.add_parser('check',
+                                        help='check validity of JSON partition')
+        p_check.add_argument('partition',
+                             nargs='?',
+                             help='a JSON partition file',
+                             type=argparse.FileType('r'),
+                             default=sys.stdin)
+        p_check.set_defaults(func=check)
+
+        p_diff = subparsers.add_parser('diff',
+                                       help='diff two JSON partitions')
+        p_diff.add_argument('first',
+                            help='a JSON partition file',
+                            type=argparse.FileType('r'))
+        p_diff.add_argument('second',
+                            help='a JSON partition file',
+                            type=argparse.FileType('r'))
+        p_diff.set_defaults(func=diff)
+
+        p_apply = subparsers.add_parser('apply',
+                                        help='apply a patch to a JSON partition')
+        p_apply.add_argument('partition',
+                             help='a JSON partition file',
+                             type=argparse.FileType('r'))
+        p_apply.add_argument('patch',
+                             help='a JSON partition patch file',
+                             type=argparse.FileType('r'))
+        p_apply.set_defaults(func=apply_diff)
+
+        p_table = subparsers.add_parser('table',
+                                        help='make merge table from JSON partition')
+        p_table.add_argument('partition',
+                             nargs='?',
+                             help='a JSON partition file',
+                             type=argparse.FileType('r'),
+                             default=sys.stdin)
+        p_table.set_defaults(func=table)
+
+        args = parser.parse_args()
+        args.func(args)
 
 
 if __name__ == '__main__':
