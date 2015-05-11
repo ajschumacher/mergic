@@ -11,6 +11,7 @@ The ``mergic`` package provides a command-line script called ``mergic``, but a m
 
 .. code:: python
 
+   #!/usr/bin/env python
    # custom_mergic.py
    import mergic
 
