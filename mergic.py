@@ -172,7 +172,7 @@ def table(args):
     data = json.loads(args.infile.read())
     _check(data)
     writer = csv.writer(sys.stdout)
-    writer.writerow(["original", "unom"])
+    writer.writerow(["original", "mergic"])
     for key, values in data.items():
         key = key.encode('utf-8')
         for value in values:
