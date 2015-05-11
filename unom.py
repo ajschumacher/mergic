@@ -170,6 +170,9 @@ def _run_as_script():
                          help='lines of text to make a partition for',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
+    p_make.add_argument('cutoff', nargs='?',
+                        help="cutoff for partition (if present)",
+                        type=float)
     p_make.set_defaults(func=make)
 
     p_check = subparsers.add_parser('check',
