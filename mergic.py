@@ -239,11 +239,11 @@ def _run_as_script():
     args.func(args)
 
 
-class Unom():
+class Blender():
     def script(self):
         _run_as_script()
 
 
 if __name__ == '__main__':
-    unom = Unom()
-    unom.script()
+    blender = Blender()
+    blender.script()
