@@ -2,7 +2,7 @@
 
 import re
 import Levenshtein
-from unom import Unom
+from mergic import Blender
 
 
 def initialize(name):
@@ -14,5 +14,5 @@ distance = lambda x, y: Levenshtein.distance(initialize(x), initialize(y))
 
 
 # TODO: actually use `distance`
-nom = Unom()
-nom.script()
+blender = Blender()
+blender.script()
