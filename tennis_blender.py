@@ -2,7 +2,7 @@
 
 import re
 import Levenshtein
-from mergic import Blender
+import mergic
 
 
 def initialize(name):
@@ -14,5 +14,5 @@ distance = lambda x, y: Levenshtein.distance(initialize(x), initialize(y))
 
 
 # TODO: actually use `distance`
-blender = Blender()
+blender = mergic.Blender()
 blender.script()
