@@ -15,4 +15,8 @@ setup(name='mergic',
       url='https://github.com/ajschumacher/mergic',
       download_url='https://github.com/ajschumacher/mergic/tarball/0.0.2',
       version='0.0.2',
-      entry_points={'console_scripts': ['mergic = mergic:script']})
+      entry_points={'console_scripts': ['mergic = mergic:script']},
+      classifiers=["Programming Language :: Python",
+                   "Programming Language :: Python :: 2.7",
+                   "License :: OSI Approved :: MIT License",
+                   "Development Status :: 2 - Pre-Alpha"])
