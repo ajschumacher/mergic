@@ -152,7 +152,12 @@ class Blender():
             links_at.setdefault(self.distance(one, other), []).append((one, other))
 
         cutoffs = sorted(links_at)
-        tables = [(len(sets), 1, 0, cutoffs[0] - 1)]
+        if args.cutoff is None:
+            print "# groups, largest group, comparisons, cutoff"
+            print "--------------------------------------------"
+            print "{0: >8}, {1: >13}, {2: >11}, {3}".format(len(sets),
+                                                                1, 0,
+                                                                cutoffs[0] - 1)
         # TODO: stop search after using all items
         for cutoff in cutoffs:
             # alternative way to grow groups: on a per-group basis
@@ -164,13 +169,12 @@ class Blender():
                 if a_set not in unique_sets:
                     unique_sets.append(a_set)
             c = Counter(len(x) for x in unique_sets)
-            tables.append((sum(c.values()),  # number of groups
-                           max(c.keys()),    # largest group
-                           sum(len(x)*(len(x)-1)/2 for x in unique_sets),
-                           cutoff))
+            if args.cutoff is None:
+                print "{0: >8}, {1: >13}, {2: >11}, {3}".format(sum(c.values()),
+                                                                    max(c.keys()),
+                                                                    sum(len(x)*(len(x)-1)/2 for x in unique_sets),
+                                                                    cutoff)
         if args.cutoff is None:
-            print "# groups, largest group, comparisons, cutoff"
-            pprint(tables)
             return None
 
         ordered_items = sets.values()[0]
