@@ -88,7 +88,7 @@ Distances You Might Like
     Levenshtein.distance("fuzzy", "wuzzy")
     # 1
 
-SeatGeek's `fuzzywuzzy <https://github.com/seatgeek/fuzzywuzzy>`__: As described in a `blog post <http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/>`__, some distance variants that people have found to work well in practice. Its responses are phrased as integer percent similarities; one way to make a distance is to subtract from 100.
+SeatGeek's `fuzzywuzzy <https://github.com/seatgeek/fuzzywuzzy>`__: As described in their `blog post <http://chairnerd.seatgeek.com/fuzzywuzzy-fuzzy-string-matching-in-python/>`__, some people have found these variants to work well in practice. ``fuzzywuzzy`` responses are phrased as integer percent similarities; one way to make a distance is to subtract from 100.
 
 .. code:: python
 
@@ -97,4 +97,6 @@ SeatGeek's `fuzzywuzzy <https://github.com/seatgeek/fuzzywuzzy>`__: As described
     100 - fuzz.ratio("Levensthein", "Leviathan")
     # 50
 
-There are a ton of distances, even just within the two packages mentioned! You can also make your own! (This is encouraged!)
+There are a ton of distances, even just within the two packages mentioned!
+
+You can also make your own!
