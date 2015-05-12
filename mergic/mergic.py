@@ -158,7 +158,6 @@ class Blender():
             print "{0: >8}, {1: >13}, {2: >11}, {3}".format(len(sets),
                                                                 1, 0,
                                                                 cutoffs[0] - 1)
-        # TODO: stop search after using all items
         for cutoff in cutoffs:
             # alternative way to grow groups: on a per-group basis
             # rather than globally changing cutoff, could just grow
