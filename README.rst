@@ -37,7 +37,7 @@ Now that ``grouping_fixed.json`` is as perfect as it can be, you can move forwar
    mergic diff grouping_fixed.json grouping_new.json
    # {}  // (no changes)
 
-The JSON grouping format is very convenient for humans, but for tabular data a merge table is more useful. A merge table has one column with the original values from your data and one column with the new reduced keys. These are named ``original`` and ``mergic`` in the output:
+The JSON grouping format is very convenient for humans, but for tabular data a merge table is more useful. A merge table has one column with the original values from your data and one column with the new keys. These are named ``original`` and ``mergic`` in the output:
 
 .. code:: bash
 
