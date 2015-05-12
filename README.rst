@@ -28,7 +28,7 @@ Now ``grouping.json`` contains a grouping of your original data, specified in `J
    cp grouping.json grouping_fixed.json
    # edit `grouping_fixed.json`
 
-Now that `grouping_fixed.json` is as perfect as it can be, you can move forward. You can also compare your two JSON grouping files and see what you changed. You can apply changes to a ``mergic``-produced file to recover your edited version. This way you have a complete and verifiable record of your work.
+Now that ``grouping_fixed.json`` is as perfect as it can be, you can move forward. You can also compare your two JSON grouping files and see what you changed. You can apply changes to a ``mergic``-produced file to recover your edited version. This way you have a complete and verifiable record of your work.
 
 .. code:: bash
 
