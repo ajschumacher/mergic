@@ -79,8 +79,6 @@ You can also use a custom function for generating the keys that values are de-du
 Distances You Might Like
 ------------------------
 
-Here are some popular distances with Python implementations:
-
 `Levenshtein string edit distance <http://en.wikipedia.org/wiki/Levenshtein_distance>`__: The classic! It has many implementations; one of them is `python-Levenshtein <http://www.coli.uni-saarland.de/courses/LT1/2011/slides/Python-Levenshtein.html>`__.
 
 .. code:: python
