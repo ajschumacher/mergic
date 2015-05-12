@@ -21,7 +21,7 @@ You will see output about the possible groupings ``mergic`` can produce based on
 
    mergic make column.txt 0.5 > grouping.json
 
-Now ``grouping.json`` contains a grouping of your original data, specified in `JSON <http://www.json.org/>`__`. It's designed to be human-readable, and human-editable, so you can check it and improve it as needed. The largest groups will be at the top, and similar items will be near one another. You can copy the produced file and edit the copy:
+Now ``grouping.json`` contains a grouping of your original data, specified in `JSON <http://www.json.org/>`__. It's designed to be human-readable, and human-editable, so you can check it and improve it as needed. The largest groups will be at the top, and similar items will be near one another. You can copy the produced file and edit the copy:
 
 .. code:: bash
 
