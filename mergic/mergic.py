@@ -8,7 +8,6 @@ from difflib import SequenceMatcher
 from itertools import combinations
 from collections import Counter
 from collections import OrderedDict
-from pprint import pprint
 
 
 def _check(partition):
@@ -149,7 +148,8 @@ class Blender():
 
         links_at = {}
         for one, other in combinations(sets, 2):
-            links_at.setdefault(self.distance(one, other), []).append((one, other))
+            links_at.setdefault(self.distance(one, other),
+                                []).append((one, other))
 
         cutoffs = sorted(links_at)
         if args.cutoff is None:
