@@ -146,12 +146,13 @@ class Blender():
         items = [item.strip() for item in args.infile.readlines()]
         sets = {item: (item,) for item in items}
 
+        # build distance "matrix"
         links_at = {}
         for one, other in combinations(sets, 2):
             links_at.setdefault(self.distance(one, other),
                                 []).append((one, other))
 
-        cutoffs = sorted(links_at)
+        cutoffs = sorted(links_at.keys())
         if args.cutoff is None:
             print "num groups, max group, num pairs, cutoff"
             print "----------------------------------------"
@@ -173,6 +174,8 @@ class Blender():
                         sum(len(x)*(len(x)-1)/2 for x in unique_sets),
                         cutoff)
                 print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
+            if sum(c.values()) == 1:
+                break
         if args.cutoff is None:
             return None
 
