@@ -5,28 +5,88 @@ mergic
 workflow support for reproducible deduplication and merging
 -----------------------------------------------------------
 
-Use ``mergic`` when you need to merge data by key identifiers that don't quite all match. Use ``mergic`` when you need to resolve duplicates that aren't perfect duplicates.
+Say you have a bunch of strings, and some of them are different but refer to the same thing. Maybe it's just some long list, maybe it's the contents of two key columns from data sets that you'd like to merge.
 
-Use ``mergic`` when you want your process to be reproducible—even when it requires some human judgment. Use ``mergic`` when human review is required, but the humans don't want to go insane.
+::
+
+    David Copperfield
+    Lance Burton
+    Dave Copperfield
+    Levar Burton
+
+Here's what you can do with ``mergic``.
 
 Give ``mergic`` all your identifiers, one per line. If they are in a file called ``column.txt``:
 
 .. code:: bash
 
-   mergic make column.txt
+   mergic make originals.txt
 
-You will see output about the possible groupings ``mergic`` can produce based on its default distance function. (It's easy to use a custom distance function—see below.) Select a cutoff to produce the grouping you would like to see. If you would like to use the cutoff 0.5 and put the results in a file called ``grouping.json``:
+You will see output about the possible groupings ``mergic`` can produce based on its default distance function. (It's easy to use a custom distance function—see below.)
+
+::
+
+    num groups, max group, num pairs, cutoff
+    ----------------------------------------
+             4,         1,         0, -0.909090909091
+             3,         2,         1, 0.0909090909091
+             2,         2,         2, 0.25
+             1,         4,         6, 0.714285714286
+
+There are 4 groupings that ``mergic`` can make with the given distance function, ranging from a group for every name to a single group for all four names.
+
+The ``num groups`` is the number of groups that ``mergic`` can make with the given ``cutoff``.
+
+The ``max group`` is the number of items in the largest group for that grouping.
+
+The ``num pairs`` column indicates the number of within-group links that correspond to the grouping. In some sense this represents how much work it is to check all the linkages that ``mergic`` is making. Thinking in groups is much better than thinking in individual pairwise comparisons, but the metric is useful for summarizing how much linking is happening.
+
+The ``cutoff`` is the largest distance that still links individual items for a grouping.
+
+Select a cutoff to produce the grouping you would like to see. If you would like to use the cutoff 0.3 and put the results in a file called ``grouping.json``:
 
 .. code:: bash
 
-   mergic make column.txt 0.5 > grouping.json
+   mergic make originals.txt 0.3 > grouping.json
 
-Now ``grouping.json`` contains a grouping of your original data, specified in `JSON <http://www.json.org/>`__. It's designed to be human-readable, and human-editable, so you can check it and improve it as needed. The largest groups will be at the top, and similar items will be near one another. You can copy the produced file and edit the copy:
+Now ``grouping.json`` contains a grouping of your original data, specified in `JSON <http://www.json.org/>`__. It's designed to be human-readable, and human-editable, so you can check it and improve it as needed. The largest groups will be at the top, and similar items will be near one another.
+
+::
+
+    {
+        "Lance Burton": [
+            "Lance Burton",
+            "Levar Burton"
+        ],
+        "David Copperfield": [
+            "Dave Copperfield",
+            "David Copperfield"
+        ]
+    }
+
+There are two proposed groups, with proposed names "Lance Burton" and "David Copperfield". You probably want to copy the produced file and edit the copy.
 
 .. code:: bash
 
    cp grouping.json grouping_fixed.json
    # edit `grouping_fixed.json`
+
+You can edit the proposed group names—the keys of the object—if you like. The original values from the data are in the array values of the object, and you can move them around to correct the grouping. In this case you could also re-run ``mergic`` with a cutoff of 0.1 to get a correct grouping:
+
+::
+
+    {
+        "David Copperfield": [
+            "Dave Copperfield",
+            "David Copperfield"
+        ],
+        "Lance Burton": [
+            "Lance Burton"
+        ],
+        "Levar Burton": [
+            "Levar Burton"
+        ]
+    }
 
 Now that ``grouping_fixed.json`` is as perfect as it can be, you can move forward. You can also compare your two JSON grouping files and see what you changed. You can apply changes to a ``mergic``-produced file to recover your edited version. This way you have a complete and verifiable record of your work.
 
@@ -42,6 +102,16 @@ The JSON grouping format is very convenient for humans, but for tabular data a m
 .. code:: bash
 
    mergic table grouping_fixed.json > merge_table.csv
+
+The file ``merge_table.csv`` looks like this:
+
+::
+
+    original,mergic
+    Lance Burton,Lance Burton
+    Levar Burton,Levar Burton
+    Dave Copperfield,David Copperfield
+    David Copperfield,David Copperfield
 
 This merge table can now be used with any tabular data system. For merges, first merge it on to both tables and then merge by the ``mergic`` key. For deduplication, merge it on to the table(s) of interest and then use the ``mergic`` column as you would have used the original data.
 
