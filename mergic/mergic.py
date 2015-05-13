@@ -29,12 +29,20 @@ def _check(partition):
     return len(all_items)
 
 
-def _link_items(belongings, links):
+def _link_items(belongings, all_groups, links):
+    """
+    `belongings` is a dict from items to the group they're in
+    `all_groups` is a set of all current groups
+    `links` contains pairs of linked items
+    """
     for one, other in links:
         if belongings[one] is belongings[other]:
             continue
         else:
             union = belongings[one] + belongings[other]
+            all_groups.add(union)
+            all_groups.remove(belongings[one])
+            all_groups.remove(belongings[other])
             for thing in union:
                 belongings[thing] = union
 
@@ -145,6 +153,7 @@ class Blender():
     def make(self, args):
         items = [item.strip() for item in args.infile.readlines()]
         sets = {item: (item,) for item in items}
+        all_groups = {(item,) for item in items}
 
         # build distance "matrix"
         links_at = {}
@@ -162,16 +171,12 @@ class Blender():
             # alternative way to grow groups: on a per-group basis
             # rather than globally changing cutoff, could just grow
             # groups until they reach some "satisfactory" size
-            _link_items(sets, links_at[cutoff])
-            unique_sets = []
-            for a_set in sets.values():
-                if a_set not in unique_sets:
-                    unique_sets.append(a_set)
-            c = Counter(len(x) for x in unique_sets)
+            _link_items(sets, all_groups, links_at[cutoff])
+            c = Counter(len(x) for x in all_groups)
             if args.cutoff is None:
                 data = (sum(c.values()),
                         max(c.keys()),
-                        sum(len(x)*(len(x)-1)/2 for x in unique_sets),
+                        sum(len(x)*(len(x)-1)/2 for x in all_groups),
                         cutoff)
                 print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
             if sum(c.values()) == 1:
@@ -183,15 +188,13 @@ class Blender():
 
         # NOT DRY (copied from above)
         sets = {item: (item,) for item in items}
+        all_groups = {(item,) for item in items}
         for cutoff in [x for x in cutoffs if x <= args.cutoff]:
-            _link_items(sets, links_at[cutoff])
-        unique_sets = []
-        for a_set in sets.values():
-            if a_set not in unique_sets:
-                unique_sets.append(a_set)
-        unique_sets.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
+            _link_items(sets, all_groups, links_at[cutoff])
+        all_groups = list(all_groups)
+        all_groups.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
         result = OrderedDict()
-        for item in unique_sets:
+        for item in all_groups:
             result[self.key_method(item)] = list(item)
 
         print json.dumps(result, indent=4, separators=(',', ': '))
