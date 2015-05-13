@@ -155,9 +155,8 @@ class Blender():
         if args.cutoff is None:
             print "num groups, max group, num pairs, cutoff"
             print "----------------------------------------"
-            print "{0: >10}, {1: >9}, {2: >9}, {3}".format(len(sets),
-                                                                1, 0,
-                                                                cutoffs[0] - 1)
+            data = (len(sets), 1, 0, cutoffs[0] - 1)
+            print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
         for cutoff in cutoffs:
             # alternative way to grow groups: on a per-group basis
             # rather than globally changing cutoff, could just grow
@@ -169,10 +168,11 @@ class Blender():
                     unique_sets.append(a_set)
             c = Counter(len(x) for x in unique_sets)
             if args.cutoff is None:
-                print "{0: >10}, {1: >9}, {2: >9}, {3}".format(sum(c.values()),
-                                                                    max(c.keys()),
-                                                                    sum(len(x)*(len(x)-1)/2 for x in unique_sets),
-                                                                    cutoff)
+                data = (sum(c.values()),
+                        max(c.keys()),
+                        sum(len(x)*(len(x)-1)/2 for x in unique_sets),
+                        cutoff)
+                print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
         if args.cutoff is None:
             return None
 
