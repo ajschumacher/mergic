@@ -153,9 +153,9 @@ class Blender():
 
         cutoffs = sorted(links_at)
         if args.cutoff is None:
-            print "# groups, largest group, comparisons, cutoff"
-            print "--------------------------------------------"
-            print "{0: >8}, {1: >13}, {2: >11}, {3}".format(len(sets),
+            print "num groups, max group, num pairs, cutoff"
+            print "----------------------------------------"
+            print "{0: >10}, {1: >9}, {2: >9}, {3}".format(len(sets),
                                                                 1, 0,
                                                                 cutoffs[0] - 1)
         for cutoff in cutoffs:
@@ -169,7 +169,7 @@ class Blender():
                     unique_sets.append(a_set)
             c = Counter(len(x) for x in unique_sets)
             if args.cutoff is None:
-                print "{0: >8}, {1: >13}, {2: >11}, {3}".format(sum(c.values()),
+                print "{0: >10}, {1: >9}, {2: >9}, {3}".format(sum(c.values()),
                                                                     max(c.keys()),
                                                                     sum(len(x)*(len(x)-1)/2 for x in unique_sets),
                                                                     cutoff)
