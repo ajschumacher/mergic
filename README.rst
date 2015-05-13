@@ -16,7 +16,7 @@ Say you have a bunch of strings, and some of them are different but refer to the
 
 Here's what you can do with ``mergic``.
 
-Give ``mergic`` all your identifiers, one per line. If they are in a file called ``column.txt``:
+Give ``mergic`` all your identifiers, one per line. If they are in a file called ``originals.txt``:
 
 .. code:: bash
 
