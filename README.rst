@@ -20,7 +20,7 @@ Give ``mergic`` all your identifiers, one per line. If they are in a file called
 
 .. code:: bash
 
-   mergic make originals.txt
+   mergic calc originals.txt
 
 You will see output about the possible groupings ``mergic`` can produce based on its default distance function. (It's easy to use a custom distance function—see below.)
 
