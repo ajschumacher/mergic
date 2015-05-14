@@ -4,6 +4,7 @@ import argparse
 import sys
 import json
 import csv
+import pickle
 from difflib import SequenceMatcher
 from itertools import combinations
 from collections import Counter
@@ -154,23 +155,30 @@ class Blender():
         self.cutoffs = None
 
     def calc(self, args):
-        items = [item.strip() for item in args.infile.readlines()]
+        try:
+            with open('.mergic_cache', 'r') as f:
+                cache = pickle.load(f)
+                (self.links_at, self.cutoffs, self.ordered_items) = cache
+                items = self.ordered_items
+        except IOError:
+            items = [item.strip() for item in args.infile.readlines()]
+            # build distance "matrix"
+            links_at = {}
+            for one, other in combinations(items, 2):
+                links_at.setdefault(self.distance(one, other),
+                                    []).append((one, other))
+            self.links_at = links_at
+            self.cutoffs = sorted(links_at.keys())
+        links_at = self.links_at
+        cutoffs = self.cutoffs
         group_for_item = {item: (item,) for item in items}
         all_groups = {(item,) for item in items}
-
-        # build distance "matrix"
-        links_at = {}
-        for one, other in combinations(group_for_item, 2):
-            links_at.setdefault(self.distance(one, other),
-                                []).append((one, other))
-        self.links_at = links_at
-        self.cutoffs = sorted(links_at.keys())
         if args.command == 'calc':
             print "num groups, max group, num pairs, cutoff"
             print "----------------------------------------"
-            data = (len(group_for_item), 1, 0, self.cutoffs[0] - 1)
+            data = (len(group_for_item), 1, 0, cutoffs[0] - 1)
             print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
-        for cutoff in self.cutoffs:
+        for cutoff in cutoffs:
             # alternative way to grow groups: on a per-group basis
             # rather than globally changing cutoff, could just grow
             # groups until they reach some "satisfactory" size
@@ -185,6 +193,8 @@ class Blender():
             if sum(c.values()) == 1:
                 break
         self.ordered_items = group_for_item.values()[0]
+        with open('.mergic_cache', 'w') as f:
+            pickle.dump((self.links_at, self.cutoffs, self.ordered_items), f)
 
     def make(self, args):
         if self.links_at is None:
@@ -217,14 +227,14 @@ class Blender():
 
         p_make = subparsers.add_parser('make',
                                        help='make a JSON partition from data')
-        p_make.add_argument('cutoff',
-                            help="cutoff for partition",
-                            type=float)
         p_make.add_argument('infile',
                             nargs='?',
                             help='lines of text to make a partition for',
                             type=argparse.FileType('r'),
                             default=sys.stdin)
+        p_make.add_argument('cutoff',
+                            help="cutoff for partition",
+                            type=float)
         p_make.set_defaults(func=self.make)
 
         p_check = subparsers.add_parser('check',
