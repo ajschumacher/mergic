@@ -179,9 +179,6 @@ class Blender():
             data = (len(group_for_item), 1, 0, cutoffs[0] - 1)
             print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
         for cutoff in cutoffs:
-            # alternative way to grow groups: on a per-group basis
-            # rather than globally changing cutoff, could just grow
-            # groups until they reach some "satisfactory" size
             _link_items(group_for_item, all_groups, links_at[cutoff])
             c = Counter(len(x) for x in all_groups)
             if args.command == 'calc':
