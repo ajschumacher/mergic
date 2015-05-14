@@ -156,7 +156,7 @@ class Blender():
 
     def calc(self, args):
         try:
-            with open('.mergic_cache', 'r') as f:
+            with open('.mergic_cache', 'rb') as f:
                 cache = pickle.load(f)
                 (self.links_at, self.cutoffs, self.ordered_items) = cache
                 items = self.ordered_items
@@ -193,8 +193,9 @@ class Blender():
             if sum(c.values()) == 1:
                 break
         self.ordered_items = group_for_item.values()[0]
-        with open('.mergic_cache', 'w') as f:
-            pickle.dump((self.links_at, self.cutoffs, self.ordered_items), f)
+        with open('.mergic_cache', 'wb') as f:
+            pickle.dump((self.links_at, self.cutoffs, self.ordered_items),
+                        f, protocol=2)
 
     def make(self, args):
         if self.links_at is None:
