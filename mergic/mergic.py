@@ -149,31 +149,34 @@ class Blender():
             self.key_method = lambda x: "|".join(x)
         else:
             self.key_method = key_method
+        self.links_at = None
+        self.ordered_items = None
+        self.cutoffs = None
 
-    def make(self, args):
+    def calc(self, args):
         items = [item.strip() for item in args.infile.readlines()]
-        sets = {item: (item,) for item in items}
+        group_for_item = {item: (item,) for item in items}
         all_groups = {(item,) for item in items}
 
         # build distance "matrix"
         links_at = {}
-        for one, other in combinations(sets, 2):
+        for one, other in combinations(group_for_item, 2):
             links_at.setdefault(self.distance(one, other),
                                 []).append((one, other))
-
-        cutoffs = sorted(links_at.keys())
-        if args.cutoff is None:
+        self.links_at = links_at
+        self.cutoffs = sorted(links_at.keys())
+        if args.command == 'calc':
             print "num groups, max group, num pairs, cutoff"
             print "----------------------------------------"
-            data = (len(sets), 1, 0, cutoffs[0] - 1)
+            data = (len(group_for_item), 1, 0, self.cutoffs[0] - 1)
             print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
-        for cutoff in cutoffs:
+        for cutoff in self.cutoffs:
             # alternative way to grow groups: on a per-group basis
             # rather than globally changing cutoff, could just grow
             # groups until they reach some "satisfactory" size
-            _link_items(sets, all_groups, links_at[cutoff])
+            _link_items(group_for_item, all_groups, links_at[cutoff])
             c = Counter(len(x) for x in all_groups)
-            if args.cutoff is None:
+            if args.command == 'calc':
                 data = (sum(c.values()),
                         max(c.keys()),
                         sum(len(x)*(len(x)-1)/2 for x in all_groups),
@@ -181,39 +184,47 @@ class Blender():
                 print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
             if sum(c.values()) == 1:
                 break
-        if args.cutoff is None:
-            return None
+        self.ordered_items = group_for_item.values()[0]
 
-        ordered_items = sets.values()[0]
-
+    def make(self, args):
+        if self.links_at is None:
+            self.calc(args)
+        links_at = self.links_at
         # NOT DRY (copied from above)
-        sets = {item: (item,) for item in items}
-        all_groups = {(item,) for item in items}
-        for cutoff in [x for x in cutoffs if x <= args.cutoff]:
-            _link_items(sets, all_groups, links_at[cutoff])
+        group_for_item = {item: (item,) for item in self.ordered_items}
+        all_groups = {(item,) for item in self.ordered_items}
+        for cutoff in [x for x in self.cutoffs if x <= args.cutoff]:
+            _link_items(group_for_item, all_groups, links_at[cutoff])
         all_groups = list(all_groups)
-        all_groups.sort(key=lambda x: (0-len(x), ordered_items.index(x[0])))
+        all_groups.sort(key=lambda x: (0-len(x), self.ordered_items.index(x[0])))
         result = OrderedDict()
         for item in all_groups:
             result[self.key_method(item)] = list(item)
-
         print json.dumps(result, indent=4, separators=(',', ': '))
 
     def script(self):
         parser = argparse.ArgumentParser()
-        subparsers = parser.add_subparsers()
+        subparsers = parser.add_subparsers(dest='command')
+
+        p_calc = subparsers.add_parser('calc',
+                                       help='calculate all partitions of data')
+        p_calc.add_argument('infile',
+                            nargs='?',
+                            help='lines of text to calculate groups for',
+                            type=argparse.FileType('r'),
+                            default=sys.stdin)
+        p_calc.set_defaults(func=self.calc)
 
         p_make = subparsers.add_parser('make',
                                        help='make a JSON partition from data')
+        p_make.add_argument('cutoff',
+                            help="cutoff for partition",
+                            type=float)
         p_make.add_argument('infile',
                             nargs='?',
                             help='lines of text to make a partition for',
                             type=argparse.FileType('r'),
                             default=sys.stdin)
-        p_make.add_argument('cutoff',
-                            nargs='?',
-                            help="cutoff for partition (if present)",
-                            type=float)
         p_make.set_defaults(func=self.make)
 
         p_check = subparsers.add_parser('check',
