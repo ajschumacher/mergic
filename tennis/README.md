@@ -88,7 +88,38 @@ def distance(x, y):
 mergic.Blender(distance).script()
 ```
 
+
 Now [tennis_mergic.py](tennis_mergic.py) can be used just like the standard `mergic` script.
+
+```bash
+./tennis_mergic.py calc names.txt
+```
+
+```text
+num groups, max group, num pairs, cutoff
+----------------------------------------
+       669,         1,         0, -1
+       358,         5,       384, 0
+       348,         6,       414, 1
+       332,         6,       470, 2
+       262,        85,      5117, 3
+       165,       324,     52611, 4
+        86,       496,    122899, 5
+        46,       584,    170287, 6
+        24,       624,    194407, 7
+        16,       641,    205138, 8
+        10,       650,    210940, 9
+         4,       663,    219459, 10
+         2,       668,    222778, 11
+         1,       669,    223446, 12
+```
+
+There is a clear best cutoff here, as the size of the max group jumps from 6 items to 85 and the number of within-group comparisons jumps from 470 to 5,117. So we create a partition where the Levenshtein distance between names in our standard first initial and last name format is no more than two, and put the result in a file called `groups.json`:
+
+```bash
+./tennis_mergic.py make names.txt 2 > groups.json
+```
+
 
 ```bash
 cat names_all.txt | ./uno.py > names_uno.txt
