@@ -66,7 +66,7 @@ def diff(args):
     mixed_to = set()
     changes = dict()
     for key, values in data2.items():
-        if data1.get(key) == values:
+        if set(data1.get(key, [])) == set(values):
             del(data1[key])
         else:
             changes[key] = values
