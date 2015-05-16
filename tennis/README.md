@@ -41,7 +41,7 @@ S Williams,V Azarenka,7,1,2,1,57,44,43,2
 Make sure you don't already have a `names.txt` file, and then produce one with all the names that appear.
 
 ```bash
-for filename in *.csv
+for filename in *2013.csv
 do
     for field in 1 2
     do
@@ -155,85 +155,89 @@ head -8 edited.json
 Parts of the review process would be difficult or impossible for a computer to do accurately.
 
  * There are the Plíšková twins, Karolína and Kristýna. When we see that `K Pliskova` appears, we have to go back and see that this occurred in the `USOpen-women-2013.csv` file, and only Karolína played in the [2013 US Open](http://en.wikipedia.org/wiki/2013_US_Open_%E2%80%93_Women%27s_Singles).
+ * In a similar but less interesting way, `B.Becker` turns out to refer to Benjamin, not Brian.
+ * An `A Wozniak` appears with `C Wozniack` and `C Wozniacki`. The first initial does turn out to differentiate the Canadian from the Dane.
+ * The name `A.Kuznetsov` refers to *both* Andrey *and* Alex in `Wimbledon-men-2013.csv`. This can't be resolved by `mergic`. One way to resolve the issues is to edit `Wimbledon-men-2013.csv` so that `A.Kuznetsov,I.Sijsling` becomes `Alex Kuznetsov,I.Sijsling`, based on checking [records from that competition](http://en.wikipedia.org/wiki/2013_Wimbledon_Championships_%E2%80%93_Men%27s_Singles).
+ * `Juan Martin Del Potro` is unfortunately too different from `J.Del Potro` in the current formulation to be grouped automatically, but a human reviewer can correct this. Similarly for `Anna Schmiedlova` and `Anna Karolina Schmiedlova`.
 
 
-
-How many unique players are there?
-
-```bash
-tail +2 names_merge.txt | cut -d, -f2 | sort | uniq | wc -l
-# 359
-```
-
-So who played the most in these events?
+After editing, you can check that the new grouping is still valid. At this stage we aren't using anything custom any more, so the default `mergic` is fine:
 
 ```bash
-join -t, <(sort names_all.txt) <(sort names_merge.txt) | cut -d, -f2 | sort | uniq -c | sort -nr | head
-#  24 Novak Djokovic
-#  22 Rafael Nadal
-#  21 Serena Williams
-#  21 David Ferrer
-#  20 Na Li
-#  19 Victoria Azarenka
-#  19 Agnieszka Radwanska
-#  18 Stanislas Wawrinka
-#  17 Tommy Robredo
-#  17 Sloane Stephens
+mergic check partition_edited.json
 ```
 
-Notes from doing the manual match for tennis (one hour):
-
-```
-Wozniacki! A Wozniak? C Wozniack?
- "C Wozniack" a typo for the Dane
- "A Wozniak" Canadian
-
-
-THE KUZNETSOVAS ><
- one American, one Russian, and they were both in Wimbledon
- ... as "A.Kuznetsov"
- but Andrey played twice
- so in "Wimbledon-men-2013.csv",
- "A.Kuznetsov,I.Sijsling," should be "Alex Kuznetsov,I.Sijsling,"
-
-B.Becker is Benjamin, not Brian
-
-cool! found the Juan Martin Del Potro fix! because they were near each other!
-
-recognized Karolina Schmiedlova as long name that could partially match
+```text
+669 items in 354 groups
 ```
 
+The `mergic` diffing tools make it easy to make comparisons that would otherwise be difficult, letting us focus on and save only changes that are human reviewers make rather than whole files.
 
-.. code:: bash
 
-    mergic check partition_edited.json
-    # 669 items in 354 groups
+```bash
+mergic diff groups.json edited.json > diff.json
+```
 
-You could proceed directly, but there are also diffing tools! Generate a
-diff:
+Now `diff.json` only has the entries that represent changes from the original `groups.json`.
 
-.. code:: bash
+The edited version can be reconstructed from the original and the diff with `mergic apply`:
 
-    mergic diff partition.json partition_edited.json > partition_diff.json
+```bash
+mergic apply groups.json diff.json > rebuilt.json
+```
 
-You can apply a diff to reconstruct an edited version:
+The order of `rebuilt.json` may not be identical to the original `edited.json`, but the diff will be empty, meaning the file is equivalent:
 
-.. code:: bash
+```bash
+mergic diff edited.json rebuilt.json
+```
 
-    mergic apply partition.json partition_diff.json > partition_rebuilt.json
+```json
+{}
+```
 
-Now if you ``mergic diff`` the files ``partition_edited.json`` and
-``partition_rebuilt.json`` the result should just be ``{}`` (no
-difference).
+Finally, to generate a CSV merge table that you'll be able to use with any other tool:
 
-To generate a CSV merge table that you'll be able to use with any other
-tool:
+```bash
+mergic table edited.json > merge.csv
+```
 
-.. code:: bash
+Now the file `merge.csv` has two columns, `original` and `mergic`, where `original` contains all the values that appeared in the original data and `mergic` contains the deduplicated keys. You can join this on to your original data and go to town.
 
-    mergic table partition_edited.json > partition.csv
+Here's how we might do that to quickly get a list of who played the most in these 2013 tennis events:
 
-Now the file ``partition.csv`` has two columns, ``original`` and
-``mergic``, where ``original`` contains all the values that appeared in
-the original data and ``mergic`` contains the deduplicated keys. You can
-join this on to your original data and go to town.
+```bash
+join -t, <(sort names.txt) <(sort merge.csv) | cut -d, -f2 | sort | uniq -c | sort -nr | head
+```
+
+```text
+  24 Novak Djokovic
+  22 Rafael Nadal
+  21 Serena Williams
+  21 David Ferrer
+  20 Na Li
+  19 Victoria Azarenka
+  19 Agnieszka Radwanska
+  18 Stanislas Wawrinka
+  17 Tommy Robredo
+  17 Sloane Stephens
+```
+
+Note that this is not the same as the result we got before resolving these name issues:
+
+```bash
+sort names.txt | uniq -c | sort -nr | head
+```
+
+```text
+  21 Rafael Nadal
+  17 Stanislas Wawrinka
+  17 Novak Djokovic
+  17 David Ferrer
+  15 Roger Federer
+  14 Tommy Robredo
+  13 Richard Gasquet
+  11 Victoria Azarenka
+  11 Tomas Berdych
+  11 Serena Williams
+```
