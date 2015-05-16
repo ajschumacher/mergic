@@ -120,12 +120,43 @@ There is a clear best cutoff here, as the size of the max group jumps from 6 ite
 ./tennis_mergic.py make names.txt 2 > groups.json
 ```
 
+As expected, the proposed grouping has combined things over-zealously in some places:
 
 ```bash
-cat names_all.txt | ./uno.py > names_uno.txt
+head -5 groups.json
 ```
 
-It looks like the only problem is with the Plíšková twins. But Karolína played in the [2013 US Open](http://en.wikipedia.org/wiki/2013_US_Open_%E2%80%93_Women%27s_Singles), so we only have to edit data rows two and three. The result is in `names_merge.txt`.
+```json
+{
+    "Yen-Hsun Lu": [
+        "Di Wu",
+        "Yen-Hsun Lu",
+        "Y-H.Lu",
+```
+
+
+Manual editing can produce a corrected version of the original grouping, which could be saved as `edited.json`:
+
+```bash
+head -8 edited.json
+```
+
+```json
+{
+    "Yen-Hsun Lu": [
+        "Yen-Hsun Lu",
+        "Y-H.Lu"
+    ],
+    "Di Wu": [
+        "Di Wu"
+    ],
+```
+
+Parts of the review process would be difficult or impossible for a computer to do accurately.
+
+ * There are the Plíšková twins, Karolína and Kristýna. When we see that `K Pliskova` appears, we have to go back and see that this occurred in the `USOpen-women-2013.csv` file, and only Karolína played in the [2013 US Open](http://en.wikipedia.org/wiki/2013_US_Open_%E2%80%93_Women%27s_Singles).
+
+
 
 How many unique players are there?
 
@@ -157,8 +188,6 @@ Wozniacki! A Wozniak? C Wozniack?
  "C Wozniack" a typo for the Dane
  "A Wozniak" Canadian
 
-Pliskova sisters
- but at least only Carolina was in the 2013 US Open
 
 THE KUZNETSOVAS ><
  one American, one Russian, and they were both in Wimbledon
@@ -174,24 +203,6 @@ cool! found the Juan Martin Del Potro fix! because they were near each other!
 recognized Karolina Schmiedlova as long name that could partially match
 ```
 
-
-This write-up was pretty specific to the tennis data:
-
-The distance calculation, cutoff evaluation, and partition creation are
-currently all in ``mergic make``:
-
-.. code:: bash
-
-    # see all the possible partitions by their statistics
-    mergic make names_all.txt
-
-    # make a partition using a cutoff of 0.303
-    mergic make 0.303 > partition.json
-
-Edit the partition until it's good. Save it as
-``partition_edited.json``.
-
-You can check that your partition is valid and see a cute summary:
 
 .. code:: bash
 
