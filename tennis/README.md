@@ -1,7 +1,5 @@
 # `mergic` with a custom distance function
 
-### with tennis player data
-
 
 Download the [Tennis Major Tournament Match Statistics Data Set](https://archive.ics.uci.edu/ml/datasets/Tennis+Major+Tournament+Match+Statistics) from the [UC Irvine Machine Learning Repository](https://archive.ics.uci.edu/ml/) into an empty directory:
 
