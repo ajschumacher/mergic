@@ -58,7 +58,6 @@ wc -l names.txt
 sort names.txt | uniq | wc -l
 ```
 
-
 There are too many unique strings—sometimes more than one string for the same player. As a result, a count of the most common names will not accurately tell us who played the most in these 2013 tennis competitions.
 
 
@@ -79,7 +78,7 @@ sort names.txt | uniq -c | sort -nr | head
   11 Serena Williams
 ```
 
-The list above is not the answer we’re looking for. We’re trying to get a correct list.
+The list above is not the answer we’re looking for. We want to be correct.
 
 
 In the tennis data, names appear sometimes with full first names and sometimes with only first initials. To get good comparisons, we should:
