@@ -38,7 +38,7 @@ S Williams,V Azarenka,7,1,2,1,57,44,43,2
 ```
 
 
-Make sure you don't already have a `names.txt` file, and then produce one with all the names that appear.
+Make a `names.txt` with all the names that appear:
 
 ```bash
 for filename in *2013.csv
