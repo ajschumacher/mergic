@@ -58,6 +58,30 @@ wc -l names.txt
 sort names.txt | uniq | wc -l
 ```
 
+
+There are too many unique strings—sometimes more than one string for the same player. As a result, a count of the most common names will not accurately tell us who played the most in these 2013 tennis competitions.
+
+
+```bash
+sort names.txt | uniq -c | sort -nr | head
+```
+
+```text
+  21 Rafael Nadal
+  17 Stanislas Wawrinka
+  17 Novak Djokovic
+  17 David Ferrer
+  15 Roger Federer
+  14 Tommy Robredo
+  13 Richard Gasquet
+  11 Victoria Azarenka
+  11 Tomas Berdych
+  11 Serena Williams
+```
+
+The list above is not the answer we’re looking for. We’re trying to get a correct list.
+
+
 In the tennis data, names appear sometimes with full first names and sometimes with only first initials. To get good comparisons, we should:
 
  * Transform all the data to the same format, as nearly as possible.
@@ -241,3 +265,5 @@ sort names.txt | uniq -c | sort -nr | head
   11 Tomas Berdych
   11 Serena Williams
 ```
+
+As it happens, using a cutoff of 0 and doing no hand editing will still give the correct top ten. In general the desired result and desired level of certainty in its correctness will inform the level of effort that is justified.
