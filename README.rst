@@ -14,7 +14,7 @@ Say you have a bunch of strings, and some of them are different but refer to the
     Dave Copperfield
     Levar Burton
 
-Here's what you can do with ``mergic``.
+Here's what you can do with ``mergic``:
 
 Give ``mergic`` all your identifiers, one per line. If they are in a file called ``originals.txt``:
 
