@@ -170,7 +170,7 @@ Parts of the review process would be difficult or impossible for a computer to d
 After editing, you can check that the new grouping is still valid. At this stage we aren't using anything custom any more, so the default `mergic` is fine:
 
 ```bash
-$ mergic check partition_edited.json
+$ mergic check edited.json
 ## 669 items in 354 groups
 ```
 
