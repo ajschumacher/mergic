@@ -88,14 +88,28 @@ You can edit the proposed group names—the keys of the object—if you like. Th
         ]
     }
 
-Now that ``grouping_fixed.json`` is as perfect as it can be, you can move forward. You can also compare your two JSON grouping files and see what you changed. You can apply changes to a ``mergic``-produced file to recover your edited version. This way you have a complete and verifiable record of your work.
+Now that ``grouping_fixed.json`` is as perfect as it can be, you can move forward.
+
+You can also compare your two JSON grouping files and see what you changed:
 
 .. code:: bash
 
    mergic diff grouping.json grouping_fixed.json > diff.json
+
+Now the file ``diff.json`` contains just what's different between ``grouping.json`` and ``grouping_fixed.json``. The ``mergic diff`` command is analogous to regular ``diff`` for text files, but it is aware of the JSON partition format so it can capture changes intelligently.
+
+You can apply changes to a ``mergic``-produced file to recover your edited version.
+
+.. code:: bash
    mergic apply grouping.json diff.json > grouping_new.json
+
+Now ``grouping_new.json`` is equivalent to ``grouping_fixed.json``, as you can verify:
+
+.. code:: bash
    mergic diff grouping_fixed.json grouping_new.json
    # {}  // (no changes)
+
+In this way you have a complete and verifiable record of your work, at the level of whole files and also at the level of changes made by hand.
 
 The JSON grouping format is very convenient for humans, but for tabular data a merge table is more useful. A merge table has one column with the original values from your data and one column with the new keys. These are named ``original`` and ``mergic`` in the output:
 
