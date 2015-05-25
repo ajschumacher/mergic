@@ -143,7 +143,7 @@ The ``mergic`` package provides a command-line script called ``mergic`` that use
 
 Now ``custom_mergic.py`` can be used just like the standard ``mergic`` script!
 
-You can also use a custom function for generating the keys that values are de-duped to; by default ``mergic.Blender`` will use the first longest of a group's values in sorted order.
+There is also a function that determines how to make a key for a group. It takes a list and returns a string. By default ``mergic.Blender`` will use the longest of a group's values (the first longest, in stable sorted order). You can also supply a custom function for generating keys.
 
 
 Distances You Might Like
