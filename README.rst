@@ -41,7 +41,7 @@ The ``max group`` is the number of items in the largest group for that grouping.
 
 The ``num pairs`` column indicates the number of within-group links that correspond to the grouping. In some sense this represents how much work it is to check all the linkages that ``mergic`` is making. Thinking in groups is much better than thinking in individual pairwise comparisons, but the metric is useful for summarizing how much linking is happening.
 
-The ``cutoff`` is the largest distance that still links individual items for a grouping.
+The ``cutoff`` determines which pairs of items are put in the same group. If the distance between two items is equal to or less than the ``cutoff``, those items will be grouped together.
 
 Select a cutoff to produce the grouping you would like to see. If you would like to use the cutoff 0.3 and put the results in a file called ``grouping.json``:
 
