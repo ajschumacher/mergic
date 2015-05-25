@@ -101,11 +101,13 @@ Now the file ``diff.json`` contains just what's different between ``grouping.jso
 You can apply changes to a ``mergic``-produced file to recover your edited version.
 
 .. code:: bash
+
    mergic apply grouping.json diff.json > grouping_new.json
 
 Now ``grouping_new.json`` is equivalent to ``grouping_fixed.json``, as you can verify:
 
 .. code:: bash
+
    mergic diff grouping_fixed.json grouping_new.json
    # {}  // (no changes)
 
