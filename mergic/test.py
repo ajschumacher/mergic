@@ -29,3 +29,8 @@ class TestLinkItems(unittest.TestCase):
         group_of = {1: (1,), 2: (2,)}
         mergic._link_items(group_of, [(1, 2)])
         self.assertIs(group_of[1], group_of[2])
+
+    def test_joins_to_correct_tuple(self):
+        group_of = {1: (1,), 2: (2,)}
+        mergic._link_items(group_of, [(1, 2)])
+        self.assertEqual(set(group_of[1]), set((1, 2)))
