@@ -45,22 +45,31 @@ def _check(partition):
     return len(all_items)
 
 
-def _link_items(belongings, all_groups, links):
-    """
-    `belongings` is a dict from items to the group they're in
-    `all_groups` is a set of all current groups
-    `links` contains pairs of linked items
+def _link_items(group_of, all_groups, links):
+    """Put items that are linked into the same group.
+
+    Parameters
+    ----------
+    group_of : dict
+        Keys are items being partitioned and values are tuples representing
+        the group that the key is currently assigned to. Usually starts as
+        every item pointing to a tuple containing only the item itself.
+    all_groups : set
+        Contains tuples representing all current groups. Usually starts as
+        a set containing one tuple for every item being partitioned.
+    links : list
+        contains pairs of linked items
     """
     for one, other in links:
-        if belongings[one] is belongings[other]:
+        if group_of[one] is group_of[other]:
             continue
         else:
-            union = belongings[one] + belongings[other]
+            union = group_of[one] + group_of[other]
             all_groups.add(union)
-            all_groups.remove(belongings[one])
-            all_groups.remove(belongings[other])
+            all_groups.remove(group_of[one])
+            all_groups.remove(group_of[other])
             for thing in union:
-                belongings[thing] = union
+                group_of[thing] = union
 
 
 def check(args):
