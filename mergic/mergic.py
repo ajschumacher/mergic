@@ -45,7 +45,7 @@ def _check(partition):
     return len(all_items)
 
 
-def _link_items(group_of, all_groups, links):
+def _link_items(group_of, links):
     """Put items that are linked into the same group.
 
     Parameters
@@ -54,20 +54,15 @@ def _link_items(group_of, all_groups, links):
         Keys are items being partitioned and values are tuples representing
         the group that the key is currently assigned to. Usually starts as
         every item pointing to a tuple containing only the item itself.
-    all_groups : set
-        Contains tuples representing all current groups. Usually starts as
-        a set containing one tuple for every item being partitioned.
     links : list
-        contains pairs of linked items
+        Contains tuples (pairs) representing items to link.
+
     """
     for one, other in links:
         if group_of[one] is group_of[other]:
             continue
         else:
             union = group_of[one] + group_of[other]
-            all_groups.add(union)
-            all_groups.remove(group_of[one])
-            all_groups.remove(group_of[other])
             for thing in union:
                 group_of[thing] = union
 
@@ -196,14 +191,14 @@ class Blender():
         links_at = self.links_at
         cutoffs = self.cutoffs
         group_for_item = {item: (item,) for item in items}
-        all_groups = {(item,) for item in items}
         if args.command == 'calc':
             print "num groups, max group, num pairs, cutoff"
             print "----------------------------------------"
             data = (len(group_for_item), 1, 0, cutoffs[0] - 1)
             print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
         for cutoff in cutoffs:
-            _link_items(group_for_item, all_groups, links_at[cutoff])
+            _link_items(group_for_item, links_at[cutoff])
+            all_groups = set(group_for_item.values())
             c = Counter(len(x) for x in all_groups)
             if args.command == 'calc':
                 data = (sum(c.values()),
@@ -224,10 +219,9 @@ class Blender():
         links_at = self.links_at
         # NOT DRY (copied from above)
         group_for_item = {item: (item,) for item in self.ordered_items}
-        all_groups = {(item,) for item in self.ordered_items}
         for cutoff in [x for x in self.cutoffs if x <= args.cutoff]:
-            _link_items(group_for_item, all_groups, links_at[cutoff])
-        all_groups = list(all_groups)
+            _link_items(group_for_item, links_at[cutoff])
+        all_groups = list(set(group_for_item.values()))
         all_groups.sort(key=lambda x: (0-len(x), self.ordered_items.index(x[0])))
         result = OrderedDict()
         for item in all_groups:
