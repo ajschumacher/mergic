@@ -68,8 +68,6 @@ def _link_items(group_of, links):
 
 
 def check(args):
-    # With JSON there is a risk of duplicate keys;
-    # the last one will win.
     data = json.loads(args.partition.read())
     n = _check(data)
     print "{} items in {} groups".format(n, len(data))
