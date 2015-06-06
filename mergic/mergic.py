@@ -14,18 +14,33 @@ from collections import OrderedDict
 def _check(partition):
     """Confirm the passed dict is a partition.
 
-    A partition is valid if no entries from the value lists
-    are ever repeated.
+    Parameters
+    ----------
+    partition : dict
+        A partition dictionary where the values are lists. Items appear
+        exactly once through all the value lists (they are "assigned to"
+        their key value.)
 
-    Raise an exception if there's a problem,
-    otherwise return the total number of entries."""
+    Returns
+    -------
+    int
+        The number of items partitioned by the partition.
+
+    Raises
+    ------
+    ValueError
+        If a value appears more than once in one value list
+        or a value appears in more than one value list.
+
+    """
     all_items = set()
     for values in partition.values():
-        # not repeated in this list
-        assert len(values) == len(set(values))
-        # not repeated from earlier
-        assert all_items.intersection(values) == set()
-        # now add to running list
+        value_set = set(values)
+        if len(values) != len(value_set):
+            raise ValueError('Duplication in {}'.format(values))
+        already_seen = list(all_items & value_set)
+        if len(already_seen) != 0:
+            raise ValueError('{} in more than one group'.format(already_seen))
         all_items.update(values)
     return len(all_items)
 
