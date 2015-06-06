@@ -1,3 +1,7 @@
+.. image:: https://readthedocs.org/projects/mergic/badge/?version=latest
+   :target: https://readthedocs.org/projects/mergic/?badge=latest
+   :alt: Documentation Status
+
 ======
 mergic
 ======
