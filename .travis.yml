@@ -1,0 +1,22 @@
+# travis-ci.org configuration
+
+
+language: python
+
+
+python:
+    - 2.7
+
+
+# integrate with coveralls.io:
+
+install:
+    - pip install coveralls
+
+
+script:
+    - coverage run --source=mergic --omit=*init* mergic/test.py
+
+
+after_success:
+    coveralls

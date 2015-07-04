@@ -1,6 +1,14 @@
+.. image:: https://travis-ci.org/ajschumacher/mergic.svg
+    :target: https://travis-ci.org/ajschumacher/mergic
+    :alt: Build Status
+
+.. image:: https://coveralls.io/repos/ajschumacher/mergic/badge.svg
+    :target: https://coveralls.io/r/ajschumacher/mergic
+    :alt: Test Coverage
+
 .. image:: https://readthedocs.org/projects/mergic/badge/?version=latest
-   :target: https://readthedocs.org/projects/mergic/?badge=latest
-   :alt: Documentation Status
+    :target: https://readthedocs.org/projects/mergic/?badge=latest
+    :alt: Documentation Status
 
 ======
 mergic
