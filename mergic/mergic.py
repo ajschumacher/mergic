@@ -100,8 +100,6 @@ def diff(args):
     if mixed_from != mixed_to:
         not_assigned = mixed_from - mixed_to
         raise ValueError(not_assigned)
-    # TODO, possibly:
-    # make the order that keys come out nicer
     print json.dumps(changes,
                      ensure_ascii=False,
                      indent=4,
