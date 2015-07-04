@@ -150,6 +150,130 @@ def table(args):
             writer.writerow([value, key])
 
 
+def _calc(self, args):
+    try:
+        with open('.mergic_cache', 'rb') as f:
+            cache = pickle.load(f)
+            (self.links_at, self.cutoffs, self.ordered_items) = cache
+            items = self.ordered_items
+    except IOError:
+        items = [item.strip() for item in args.infile.readlines()]
+        # build distance "matrix"
+        links_at = {}
+        for one, other in combinations(items, 2):
+            links_at.setdefault(self.distance(one, other),
+                                []).append((one, other))
+        self.links_at = links_at
+        self.cutoffs = sorted(links_at.keys())
+    links_at = self.links_at
+    cutoffs = self.cutoffs
+    group_for_item = {item: (item,) for item in items}
+    if args.command == 'calc':
+        print "num groups, max group, num pairs, cutoff"
+        print "----------------------------------------"
+        data = (len(group_for_item), 1, 0, cutoffs[0] - 1)
+        print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
+    for cutoff in cutoffs:
+        _link_items(group_for_item, links_at[cutoff])
+        all_groups = set(group_for_item.values())
+        c = Counter(len(x) for x in all_groups)
+        if args.command == 'calc':
+            data = (sum(c.values()),
+                    max(c.keys()),
+                    sum(len(x)*(len(x)-1)/2 for x in all_groups),
+                    cutoff)
+            print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
+        if sum(c.values()) == 1:
+            break
+    self.ordered_items = group_for_item.values()[0]
+    with open('.mergic_cache', 'wb') as f:
+        pickle.dump((self.links_at, self.cutoffs, self.ordered_items),
+                    f, protocol=2)
+
+
+def _make(self, args):
+    if self.links_at is None:
+        self.calc(args)
+    links_at = self.links_at
+    # NOT DRY (copied from above)
+    group_for_item = {item: (item,) for item in self.ordered_items}
+    for cutoff in [x for x in self.cutoffs if x <= args.cutoff]:
+        _link_items(group_for_item, links_at[cutoff])
+    all_groups = list(set(group_for_item.values()))
+    all_groups.sort(key=lambda x: (0-len(x), self.ordered_items.index(x[0])))
+    result = OrderedDict()
+    for item in all_groups:
+        result[self.key_method(item)] = list(item)
+    print json.dumps(result, indent=4, separators=(',', ': '))
+
+
+def _script(self):
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest='command')
+
+    p_calc = subparsers.add_parser('calc',
+                                   help='calculate all partitions of data')
+    p_calc.add_argument('infile',
+                        nargs='?',
+                        help='lines of text to calculate groups for',
+                        type=argparse.FileType('r'),
+                        default=sys.stdin)
+    p_calc.set_defaults(func=self.calc)
+
+    p_make = subparsers.add_parser('make',
+                                   help='make a JSON partition from data')
+    p_make.add_argument('infile',
+                        nargs='?',
+                        help='lines of text to make a partition for',
+                        type=argparse.FileType('r'),
+                        default=sys.stdin)
+    p_make.add_argument('cutoff',
+                        help="cutoff for partition",
+                        type=float)
+    p_make.set_defaults(func=self.make)
+
+    p_check = subparsers.add_parser('check',
+                                    help='check validity of JSON partition')
+    p_check.add_argument('partition',
+                         nargs='?',
+                         help='a JSON partition file',
+                         type=argparse.FileType('r'),
+                         default=sys.stdin)
+    p_check.set_defaults(func=check)
+
+    p_diff = subparsers.add_parser('diff',
+                                   help='diff two JSON partitions')
+    p_diff.add_argument('first',
+                        help='a JSON partition file',
+                        type=argparse.FileType('r'))
+    p_diff.add_argument('second',
+                        help='a JSON partition file',
+                        type=argparse.FileType('r'))
+    p_diff.set_defaults(func=diff)
+
+    p_apply = subparsers.add_parser('apply',
+                                    help='apply a patch to a JSON partition')
+    p_apply.add_argument('partition',
+                         help='a JSON partition file',
+                         type=argparse.FileType('r'))
+    p_apply.add_argument('patch',
+                         help='a JSON partition patch file',
+                         type=argparse.FileType('r'))
+    p_apply.set_defaults(func=apply_diff)
+
+    p_table = subparsers.add_parser('table',
+                                    help='make merge table from JSON partition')
+    p_table.add_argument('partition',
+                         nargs='?',
+                         help='a JSON partition file',
+                         type=argparse.FileType('r'),
+                         default=sys.stdin)
+    p_table.set_defaults(func=table)
+
+    args = parser.parse_args()
+    args.func(args)
+
+
 class Blender():
 
     def __init__(self, distance='stock', key_method='longest'):
@@ -167,126 +291,9 @@ class Blender():
         self.ordered_items = None
         self.cutoffs = None
 
-    def calc(self, args):
-        try:
-            with open('.mergic_cache', 'rb') as f:
-                cache = pickle.load(f)
-                (self.links_at, self.cutoffs, self.ordered_items) = cache
-                items = self.ordered_items
-        except IOError:
-            items = [item.strip() for item in args.infile.readlines()]
-            # build distance "matrix"
-            links_at = {}
-            for one, other in combinations(items, 2):
-                links_at.setdefault(self.distance(one, other),
-                                    []).append((one, other))
-            self.links_at = links_at
-            self.cutoffs = sorted(links_at.keys())
-        links_at = self.links_at
-        cutoffs = self.cutoffs
-        group_for_item = {item: (item,) for item in items}
-        if args.command == 'calc':
-            print "num groups, max group, num pairs, cutoff"
-            print "----------------------------------------"
-            data = (len(group_for_item), 1, 0, cutoffs[0] - 1)
-            print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
-        for cutoff in cutoffs:
-            _link_items(group_for_item, links_at[cutoff])
-            all_groups = set(group_for_item.values())
-            c = Counter(len(x) for x in all_groups)
-            if args.command == 'calc':
-                data = (sum(c.values()),
-                        max(c.keys()),
-                        sum(len(x)*(len(x)-1)/2 for x in all_groups),
-                        cutoff)
-                print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
-            if sum(c.values()) == 1:
-                break
-        self.ordered_items = group_for_item.values()[0]
-        with open('.mergic_cache', 'wb') as f:
-            pickle.dump((self.links_at, self.cutoffs, self.ordered_items),
-                        f, protocol=2)
-
-    def make(self, args):
-        if self.links_at is None:
-            self.calc(args)
-        links_at = self.links_at
-        # NOT DRY (copied from above)
-        group_for_item = {item: (item,) for item in self.ordered_items}
-        for cutoff in [x for x in self.cutoffs if x <= args.cutoff]:
-            _link_items(group_for_item, links_at[cutoff])
-        all_groups = list(set(group_for_item.values()))
-        all_groups.sort(key=lambda x: (0-len(x), self.ordered_items.index(x[0])))
-        result = OrderedDict()
-        for item in all_groups:
-            result[self.key_method(item)] = list(item)
-        print json.dumps(result, indent=4, separators=(',', ': '))
-
-    def script(self):
-        parser = argparse.ArgumentParser()
-        subparsers = parser.add_subparsers(dest='command')
-
-        p_calc = subparsers.add_parser('calc',
-                                       help='calculate all partitions of data')
-        p_calc.add_argument('infile',
-                            nargs='?',
-                            help='lines of text to calculate groups for',
-                            type=argparse.FileType('r'),
-                            default=sys.stdin)
-        p_calc.set_defaults(func=self.calc)
-
-        p_make = subparsers.add_parser('make',
-                                       help='make a JSON partition from data')
-        p_make.add_argument('infile',
-                            nargs='?',
-                            help='lines of text to make a partition for',
-                            type=argparse.FileType('r'),
-                            default=sys.stdin)
-        p_make.add_argument('cutoff',
-                            help="cutoff for partition",
-                            type=float)
-        p_make.set_defaults(func=self.make)
-
-        p_check = subparsers.add_parser('check',
-                                        help='check validity of JSON partition')
-        p_check.add_argument('partition',
-                             nargs='?',
-                             help='a JSON partition file',
-                             type=argparse.FileType('r'),
-                             default=sys.stdin)
-        p_check.set_defaults(func=check)
-
-        p_diff = subparsers.add_parser('diff',
-                                       help='diff two JSON partitions')
-        p_diff.add_argument('first',
-                            help='a JSON partition file',
-                            type=argparse.FileType('r'))
-        p_diff.add_argument('second',
-                            help='a JSON partition file',
-                            type=argparse.FileType('r'))
-        p_diff.set_defaults(func=diff)
-
-        p_apply = subparsers.add_parser('apply',
-                                        help='apply a patch to a JSON partition')
-        p_apply.add_argument('partition',
-                             help='a JSON partition file',
-                             type=argparse.FileType('r'))
-        p_apply.add_argument('patch',
-                             help='a JSON partition patch file',
-                             type=argparse.FileType('r'))
-        p_apply.set_defaults(func=apply_diff)
-
-        p_table = subparsers.add_parser('table',
-                                        help='make merge table from JSON partition')
-        p_table.add_argument('partition',
-                             nargs='?',
-                             help='a JSON partition file',
-                             type=argparse.FileType('r'),
-                             default=sys.stdin)
-        p_table.set_defaults(func=table)
-
-        args = parser.parse_args()
-        args.func(args)
+    calc = _calc
+    make = _make
+    script = _script
 
 
 def script():
