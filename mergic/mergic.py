@@ -79,33 +79,63 @@ def link_items(group_of, links):
                 group_of[thing] = union
 
 
-def diff_(args):
-    data1 = json.loads(args.first.read())
-    check(data1)
-    data2 = json.loads(args.second.read())
-    check(data2)
+def diff(first, second):
+    """Generate the differences from a first to a second partition.
 
+    Parameters
+    ----------
+    first  : dict
+    second : dict
+        Partition dictionaries where the values are lists. In each,
+        items appear exactly once through all the value lists (they
+        are "assigned to" their key value.)
+
+    Returns
+    -------
+    dict
+        A partition for the set of values that are assigned differently
+        in the second partition than the first. It can be applied to
+        the first partition to generate the second.
+
+    Raises
+    ------
+    ValueError
+        If a value in the first partition is not assigned anywhere in
+        the second partition or if the second partition assigns a
+        value not found in the first partition.
+
+    """
     mixed_from = set()
     mixed_to = set()
     changes = dict()
-    for key, values in data2.items():
-        if set(data1.get(key, [])) == set(values):
-            del(data1[key])
+    for key, values in second.items():
+        if set(first.get(key, [])) == set(values):
+            del(first[key])
         else:
             changes[key] = values
             mixed_to.update(values)
             to_find = mixed_to - mixed_from
-            for key_from, values_from in data1.items():
+            for key_from, values_from in first.items():
                 values_from = set(values_from)
                 if to_find & values_from:
                     mixed_from.update(values_from)
-                    del(data1[key_from])
+                    del(first[key_from])
             not_found = to_find - mixed_from
             if not_found:
                 raise ValueError(not_found)
     if mixed_from != mixed_to:
         not_assigned = mixed_from - mixed_to
         raise ValueError(not_assigned)
+    return changes
+
+
+def diff_(args):
+    """Check and diff two partitions loaded from files at the command line"""
+    first = json.loads(args.first.read())
+    check(first)
+    second = json.loads(args.second.read())
+    check(second)
+    changes = diff(first, second)
     print json.dumps(changes,
                      ensure_ascii=False,
                      indent=4,
