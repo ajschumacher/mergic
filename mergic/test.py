@@ -36,5 +36,30 @@ class TestLinkItems(unittest.TestCase):
         self.assertEqual(set(group_of[1]), set((1, 2)))
 
 
+class TestDiff(unittest.TestCase):
+
+    def test_no_diff_when_same(self):
+        self.assertEqual(mergic.diff({1: [1]}, {1: [1]}), {})
+
+    def test_order_doesnt_matter(self):
+        self.assertEqual(mergic.diff({1: [1, 2]}, {1: [2, 1]}), {})
+
+    def test_raises_when_first_doesnt_assign(self):
+        with self.assertRaises(ValueError):
+            mergic.diff({1: [1]}, {1: [1, 2]})
+
+    def test_raises_when_second_doesnt_assign(self):
+        with self.assertRaises(ValueError):
+            mergic.diff({1: [1, 2]}, {1: [1]})
+
+    def test_renaming_key_picked_up(self):
+        self.assertEqual(mergic.diff({1: [1]}, {2: [1]}), {2: [1]})
+
+    def test_splitting_value_picked_up(self):
+        self.assertEqual(mergic.diff({1: [1, 2], 3: [3]},
+                                     {1: [1], 2: [2], 3: [3]}),
+                         {1: [1], 2: [2]})
+
+
 if __name__ == '__main__':
     unittest.main()
