@@ -11,6 +11,11 @@ from collections import Counter
 from collections import OrderedDict
 
 
+# Naming convention:
+# A leading underscore means the function takes "self"
+# A trailing underscore means the function takes parser "args"
+
+
 def check(partition):
     """Confirm the passed dict is a partition.
 
@@ -73,7 +78,7 @@ def check_(args):
     print "{} items in {} groups".format(n, len(data))
 
 
-def diff(args):
+def diff_(args):
     data1 = json.loads(args.first.read())
     check(data1)
     data2 = json.loads(args.second.read())
@@ -106,7 +111,7 @@ def diff(args):
                      separators=(',', ': ')).encode('utf-8')
 
 
-def apply_diff(args):
+def apply_diff_(args):
     original = json.loads(args.partition.read())
     check(original)
     changes = json.loads(args.patch.read())
@@ -138,7 +143,7 @@ def apply_diff(args):
                      separators=(',', ': ')).encode('utf-8')
 
 
-def table(args):
+def table_(args):
     data = json.loads(args.partition.read())
     check(data)
     writer = csv.writer(sys.stdout)
@@ -150,7 +155,7 @@ def table(args):
             writer.writerow([value, key])
 
 
-def _calc(self, args):
+def _calc_(self, args):
     try:
         with open('.mergic_cache', 'rb') as f:
             cache = pickle.load(f)
@@ -191,7 +196,7 @@ def _calc(self, args):
                     f, protocol=2)
 
 
-def _make(self, args):
+def _make_(self, args):
     if self.links_at is None:
         self.calc(args)
     links_at = self.links_at
@@ -249,7 +254,7 @@ def _script(self):
     p_diff.add_argument('second',
                         help='a JSON partition file',
                         type=argparse.FileType('r'))
-    p_diff.set_defaults(func=diff)
+    p_diff.set_defaults(func=diff_)
 
     p_apply = subparsers.add_parser('apply',
                                     help='apply a patch to a JSON partition')
@@ -259,7 +264,7 @@ def _script(self):
     p_apply.add_argument('patch',
                          help='a JSON partition patch file',
                          type=argparse.FileType('r'))
-    p_apply.set_defaults(func=apply_diff)
+    p_apply.set_defaults(func=apply_diff_)
 
     p_table = subparsers.add_parser('table',
                                     help='make merge table from JSON partition')
@@ -268,7 +273,7 @@ def _script(self):
                          help='a JSON partition file',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
-    p_table.set_defaults(func=table)
+    p_table.set_defaults(func=table_)
 
     args = parser.parse_args()
     args.func(args)
@@ -291,8 +296,8 @@ class Blender():
         self.ordered_items = None
         self.cutoffs = None
 
-    calc = _calc
-    make = _make
+    calc = _calc_
+    make = _make_
     script = _script
 
 
