@@ -1,5 +1,5 @@
-import unittest
 import mergic
+import unittest
 
 
 class TestCheck(unittest.TestCase):
@@ -34,3 +34,7 @@ class TestLinkItems(unittest.TestCase):
         group_of = {1: (1,), 2: (2,)}
         mergic._link_items(group_of, [(1, 2)])
         self.assertEqual(set(group_of[1]), set((1, 2)))
+
+
+if __name__ == '__main__':
+    unittest.main()
