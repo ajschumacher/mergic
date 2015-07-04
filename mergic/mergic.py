@@ -11,7 +11,7 @@ from collections import Counter
 from collections import OrderedDict
 
 
-def _check(partition):
+def check(partition):
     """Confirm the passed dict is a partition.
 
     Parameters
@@ -45,7 +45,7 @@ def _check(partition):
     return len(all_items)
 
 
-def _link_items(group_of, links):
+def link_items(group_of, links):
     """Put items that are linked into the same group.
 
     Parameters
@@ -67,17 +67,17 @@ def _link_items(group_of, links):
                 group_of[thing] = union
 
 
-def check(args):
+def check_(args):
     data = json.loads(args.partition.read())
-    n = _check(data)
+    n = check(data)
     print "{} items in {} groups".format(n, len(data))
 
 
 def diff(args):
     data1 = json.loads(args.first.read())
-    _check(data1)
+    check(data1)
     data2 = json.loads(args.second.read())
-    _check(data2)
+    check(data2)
 
     mixed_from = set()
     mixed_to = set()
@@ -108,7 +108,7 @@ def diff(args):
 
 def apply_diff(args):
     original = json.loads(args.partition.read())
-    _check(original)
+    check(original)
     changes = json.loads(args.patch.read())
 
     mixed_from = set()
@@ -140,7 +140,7 @@ def apply_diff(args):
 
 def table(args):
     data = json.loads(args.partition.read())
-    _check(data)
+    check(data)
     writer = csv.writer(sys.stdout)
     writer.writerow(["original", "mergic"])
     for key, values in data.items():
@@ -174,7 +174,7 @@ def _calc(self, args):
         data = (len(group_for_item), 1, 0, cutoffs[0] - 1)
         print "{0: >10}, {1: >9}, {2: >9}, {3}".format(*data)
     for cutoff in cutoffs:
-        _link_items(group_for_item, links_at[cutoff])
+        link_items(group_for_item, links_at[cutoff])
         all_groups = set(group_for_item.values())
         c = Counter(len(x) for x in all_groups)
         if args.command == 'calc':
@@ -198,7 +198,7 @@ def _make(self, args):
     # NOT DRY (copied from above)
     group_for_item = {item: (item,) for item in self.ordered_items}
     for cutoff in [x for x in self.cutoffs if x <= args.cutoff]:
-        _link_items(group_for_item, links_at[cutoff])
+        link_items(group_for_item, links_at[cutoff])
     all_groups = list(set(group_for_item.values()))
     all_groups.sort(key=lambda x: (0-len(x), self.ordered_items.index(x[0])))
     result = OrderedDict()
@@ -239,7 +239,7 @@ def _script(self):
                          help='a JSON partition file',
                          type=argparse.FileType('r'),
                          default=sys.stdin)
-    p_check.set_defaults(func=check)
+    p_check.set_defaults(func=check_)
 
     p_diff = subparsers.add_parser('diff',
                                    help='diff two JSON partitions')
