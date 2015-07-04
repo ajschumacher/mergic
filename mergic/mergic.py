@@ -50,6 +50,13 @@ def check(partition):
     return len(all_items)
 
 
+def check_(args):
+    """Check a partition loaded from a file at the command line"""
+    data = json.loads(args.partition.read())
+    n = check(data)
+    print "{} items in {} groups".format(n, len(data))
+
+
 def link_items(group_of, links):
     """Put items that are linked into the same group.
 
@@ -70,12 +77,6 @@ def link_items(group_of, links):
             union = group_of[one] + group_of[other]
             for thing in union:
                 group_of[thing] = union
-
-
-def check_(args):
-    data = json.loads(args.partition.read())
-    n = check(data)
-    print "{} items in {} groups".format(n, len(data))
 
 
 def diff_(args):
