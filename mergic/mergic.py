@@ -240,8 +240,7 @@ def table(partition):
     Yields
     ------
     tuple
-        Pairs of original and new names, as specified in the partition,
-        encoded in UTF-8.
+        Pairs of original and new names, as specified in the partition.
 
     """
     for key, values in partition.items():
@@ -392,18 +391,59 @@ def _script(self):
     args.func(args)
 
 
-class Blender():
+class Blender(object):
+    """An encapsulation of mergic behaviors for deduplication.
+
+    Maintains state (see attributes and __init__ parameters) for
+    processing data for entity resolution.
+
+    Attributes
+    ----------
+    links_at : dict
+        Numeric keys representing distances point to lists containing
+        length two tuples where each tuple is a pair of elements
+        separated by the corresponding distance.
+
+    ordered_items : list
+        All the original items in the order induced by grouping them
+        agglomeratively. Used for ordering other groupings.
+
+    cutoffs : list
+        A sorted list of cutoffs (keys from `links_at`), exposed
+        separately for convenience.
+
+    """
 
     def __init__(self, distance='stock', key_method='longest'):
+        """Create a new mergic Blender.
+
+        Parameters
+        ----------
+        distance : function or 'stock' (default='stock')
+            A function of two variables which returns a distance.
+            Larger return values indicate greater distance.
+            The default ('stock') becomes a string distance using
+            only the base Python SequenceMatcher.
+
+        key_method : function, 'longest', or 'append' (default='longest')
+            A function of a list that returns a string to use as the
+            default key for a group.
+            The default ('longest') returns the longest element in the
+            list, with ties broken by Python's stable sort.
+            The 'append' method concatenates all the elements of the
+            list, in sorted order.
+
+        """
         if distance == 'stock':
             distance = lambda a, b: 1 - SequenceMatcher(None, a, b).ratio()
         self.distance = distance
+
         if key_method == 'longest':
-            self.key_method = lambda x: max(sorted(x), key=len)
+            key_method = lambda x: max(sorted(x), key=len)
         elif key_method == 'append':
-            self.key_method = lambda x: "|".join(x)
-        else:
-            self.key_method = key_method
+            key_method = lambda x: "|".join(sorted(x))
+        self.key_method = key_method
+
         self.links_at = None
         self.ordered_items = None
         self.cutoffs = None
