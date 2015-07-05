@@ -226,17 +226,37 @@ def apply_diff_(args):
     print_json(partition)
 
 
+def table(partition):
+    """Generate 'merge table' rows from a partition.
+
+    Parameters
+    ----------
+    partition : dict
+        A partition dictionary where the values are lists. Items appear
+        exactly once through all the value lists (they are "assigned to"
+        their key value.)
+
+    Yields
+    ------
+    tuple
+        Pairs of original and new names, as specified in the partition,
+        encoded in UTF-8.
+
+    """
+    for key, values in partition.items():
+        for value in values:
+            yield (value, key)
+
+
 def table_(args):
     """Print out a two-column 'merge table' at the command line."""
-    data = json.loads(args.partition.read())
-    check(data)
+    partition = json.loads(args.partition.read())
+    check(partition)
     writer = csv.writer(sys.stdout)
     writer.writerow(["original", "mergic"])
-    for key, values in data.items():
-        key = key.encode('utf-8')
-        for value in values:
-            value = value.encode('utf-8')
-            writer.writerow([value, key])
+    for row in table(partition):
+        row = [str(element).encode('utf-8') for element in row]
+        writer.writerow(row)
 
 
 def _calc_(self, args):

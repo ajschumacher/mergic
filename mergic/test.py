@@ -91,5 +91,20 @@ class TestEqual(unittest.TestCase):
                                      {2: ['a'], 1: [3, 2, 1]}))
 
 
+class TestTable(unittest.TestCase):
+
+    def test_nothing_for_empty(self):
+        self.assertEqual(len(list(mergic.table({}))), 0)
+
+    def test_right_number_of_rows(self):
+        p = {1: [2, 3], 'b': [4, 5, 6]}
+        self.assertEqual(len(list(mergic.table(p))), 5)
+
+    def test_correct_rows_appear(self):
+        p = {1: [2, 3], 'b': [4, 5, 6]}
+        rowset = set([(2, 1), (3, 1), (4, 'b'), (5, 'b'), (6, 'b')])
+        self.assertEqual(set(mergic.table(p)), rowset)
+
+
 if __name__ == '__main__':
     unittest.main()
