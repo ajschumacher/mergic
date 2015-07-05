@@ -227,6 +227,7 @@ def apply_diff_(args):
 
 
 def table_(args):
+    """Print out a two-column 'merge table' at the command line."""
     data = json.loads(args.partition.read())
     check(data)
     writer = csv.writer(sys.stdout)
@@ -239,6 +240,7 @@ def table_(args):
 
 
 def _calc_(self, args):
+    """Calculate possible groupings and print out a summary."""
     try:
         with open('.mergic_cache', 'rb') as f:
             cache = pickle.load(f)
@@ -280,6 +282,7 @@ def _calc_(self, args):
 
 
 def _make_(self, args):
+    """Generate and print out a partition at a cutoff."""
     if self.links_at is None:
         self.calc(args)
     links_at = self.links_at
@@ -296,6 +299,7 @@ def _make_(self, args):
 
 
 def _script(self):
+    """Parse command-line arguments and expose functionality."""
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command')
 
@@ -385,6 +389,7 @@ class Blender():
 
 
 def script():
+    """Run a default mergic Blender at the command line."""
     blender = Blender()
     blender.script()
 
