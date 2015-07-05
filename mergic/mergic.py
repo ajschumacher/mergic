@@ -16,6 +16,13 @@ from collections import OrderedDict
 # A trailing underscore means the function takes parser "args"
 
 
+def print_json(thing):
+    print json.dumps(thing,
+                     ensure_ascii=False,
+                     indent=4,
+                     separators=(',', ': ')).encode('utf-8')
+
+
 def check(partition):
     """Confirm the passed dict is a partition.
 
@@ -136,10 +143,7 @@ def diff_(args):
     second = json.loads(args.second.read())
     check(second)
     changes = diff(first, second)
-    print json.dumps(changes,
-                     ensure_ascii=False,
-                     indent=4,
-                     separators=(',', ': ')).encode('utf-8')
+    print_json(changes)
 
 
 def apply_diff_(args):
@@ -168,10 +172,7 @@ def apply_diff_(args):
         not_assigned = mixed_from - mixed_to
         raise ValueError(not_assigned)
     original.update(changes)
-    print json.dumps(original,
-                     ensure_ascii=False,
-                     indent=4,
-                     separators=(',', ': ')).encode('utf-8')
+    print_json(original)
 
 
 def table_(args):
@@ -240,7 +241,7 @@ def _make_(self, args):
     result = OrderedDict()
     for item in all_groups:
         result[self.key_method(item)] = list(item)
-    print json.dumps(result, indent=4, separators=(',', ': '))
+    print_json(result)
 
 
 def _script(self):
