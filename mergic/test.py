@@ -2,6 +2,13 @@ import mergic
 import unittest
 
 
+class TestPrettyJson(unittest.TestCase):
+
+    def test_prettifies_as_expected(self):
+        expected = '{\n    "1": [\n        1,\n        2\n    ]\n}'
+        self.assertEqual(mergic.pretty_json({1: [1, 2]}), expected)
+
+
 class TestCheck(unittest.TestCase):
 
     def test_raises_on_duplicate_in_value_list(self):

@@ -17,12 +17,12 @@ __version__ = '0.0.7'
 # A trailing underscore means the function takes parser "args"
 
 
-def print_json(thing):
-    """Print a Python data structure as formatted JSON."""
-    print json.dumps(thing,
-                     ensure_ascii=False,
-                     indent=4,
-                     separators=(',', ': ')).encode('utf-8')
+def pretty_json(thing):
+    """Prettify a Python data structure as formatted JSON."""
+    return json.dumps(thing,
+                      ensure_ascii=False,
+                      indent=4,
+                      separators=(',', ': ')).encode('utf-8')
 
 
 def check(partition):
@@ -145,7 +145,7 @@ def diff_(args):
     second = json.loads(args.second.read())
     check(second)
     patch = diff(first, second)
-    print_json(patch)
+    print pretty_json(patch)
 
 
 def equal(first, second):
@@ -224,7 +224,7 @@ def apply_diff_(args):
     check(partition)
     patch = json.loads(args.patch.read())
     apply_diff(partition, patch)
-    print_json(partition)
+    print pretty_json(partition)
 
 
 def table(partition):
@@ -316,7 +316,7 @@ def _make_(self, args):
     result = OrderedDict()
     for item in all_groups:
         result[self.key_method(item)] = list(item)
-    print_json(result)
+    print pretty_json(result)
 
 
 def _script(self):
