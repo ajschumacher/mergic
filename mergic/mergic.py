@@ -17,6 +17,7 @@ from collections import OrderedDict
 
 
 def print_json(thing):
+    """Print a Python data structure as formatted JSON"""
     print json.dumps(thing,
                      ensure_ascii=False,
                      indent=4,
