@@ -17,7 +17,7 @@ from collections import OrderedDict
 
 
 def print_json(thing):
-    """Print a Python data structure as formatted JSON"""
+    """Print a Python data structure as formatted JSON."""
     print json.dumps(thing,
                      ensure_ascii=False,
                      indent=4,
@@ -59,7 +59,7 @@ def check(partition):
 
 
 def check_(args):
-    """Check a partition loaded from a file at the command line"""
+    """Check a partition loaded from a file at the command line."""
     data = json.loads(args.partition.read())
     n = check(data)
     print "{} items in {} groups".format(n, len(data))
@@ -138,7 +138,7 @@ def diff(first, second):
 
 
 def diff_(args):
-    """Check and diff two partitions loaded from files at the command line"""
+    """Check and diff two partitions loaded from files at the command line."""
     first = json.loads(args.first.read())
     check(first)
     second = json.loads(args.second.read())
@@ -148,7 +148,7 @@ def diff_(args):
 
 
 def equal(first, second):
-    """Check a first and second partition for equality
+    """Check a first and second partition for equality.
 
     Parameters
     ----------
