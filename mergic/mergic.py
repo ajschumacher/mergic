@@ -101,9 +101,9 @@ def diff(first, second):
     Returns
     -------
     dict
-        A partition for the set of values that are assigned differently
-        in the second partition than the first. It can be applied to
-        the first partition to generate the second.
+        A "patch" partition, for the set of values that are assigned
+        differently in the second partition than the first. It can be
+        applied to the first partition to generate the second.
 
     Raises
     ------
@@ -174,6 +174,26 @@ def equal(first, second):
 
 
 def apply_diff(partition, patch):
+    """Apply a patch to a partition (in place).
+
+    Parameters
+    ----------
+    partition : dict
+        A partition dictionary where the values are lists. Items appear
+        exactly once through all the value lists (they are "assigned to"
+        their key value.)
+
+    patch : dict
+        A "patch" partition, for the set of values that should be
+        assigned differently from how they are in the original
+        partition.
+
+    Returns
+    -------
+    None
+        The `partition` passed is modified in place.
+
+    """
     mixed_from = set()
     mixed_to = set()
     for key, values in patch.items():
@@ -198,11 +218,12 @@ def apply_diff(partition, patch):
 
 
 def apply_diff_(args):
-    original = json.loads(args.partition.read())
-    check(original)
+    """Apply a patch to a partition, at the command line."""
+    partition = json.loads(args.partition.read())
+    check(partition)
     patch = json.loads(args.patch.read())
-    apply_diff(original, patch)
-    print_json(original)
+    apply_diff(partition, patch)
+    print_json(partition)
 
 
 def table_(args):
