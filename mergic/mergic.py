@@ -353,8 +353,8 @@ def _script(self):
                          type=argparse.FileType('r'))
     p_apply.set_defaults(func=apply_diff_)
 
-    p_table = subparsers.add_parser('table',
-                                    help='make merge table from JSON partition')
+    p_table_help = 'make a merge table from a JSON partition'
+    p_table = subparsers.add_parser('table', help=p_table_help)
     p_table.add_argument('partition',
                          nargs='?',
                          help='a JSON partition file',
@@ -370,9 +370,8 @@ class Blender():
 
     def __init__(self, distance='stock', key_method='longest'):
         if distance == 'stock':
-            self.distance = lambda a, b: 1 - SequenceMatcher(None, a, b).ratio()
-        else:
-            self.distance = distance
+            distance = lambda a, b: 1 - SequenceMatcher(None, a, b).ratio()
+        self.distance = distance
         if key_method == 'longest':
             self.key_method = lambda x: max(sorted(x), key=len)
         elif key_method == 'append':
