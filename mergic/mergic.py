@@ -147,6 +147,32 @@ def diff_(args):
     print_json(changes)
 
 
+def equal(first, second):
+    """Check a first and second partition for equality
+
+    Parameters
+    ----------
+    first  : dict
+    second : dict
+        Partition dictionaries where the values are lists. In each,
+        items appear exactly once through all the value lists (they
+        are "assigned to" their key value.)
+
+    Returns
+    -------
+    boolean
+        True if the difference is empty, otherwise False.
+
+    """
+    try:
+        d = diff(first, second)
+        if d == {}:
+            return True
+    except ValueError:
+        pass
+    return False
+
+
 def apply_diff_(args):
     original = json.loads(args.partition.read())
     check(original)

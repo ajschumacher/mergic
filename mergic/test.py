@@ -61,5 +61,35 @@ class TestDiff(unittest.TestCase):
                          {1: [1], 2: [2]})
 
 
+class TestEqual(unittest.TestCase):
+
+    def test_equal_if_empty(self):
+        self.assertTrue(mergic.equal({}, {}))
+
+    def test_not_equal_if_one_not_empty(self):
+        self.assertFalse(mergic.equal({}, {1: [1]}))
+
+    def test_raises_on_string_nonsense(self):
+        with self.assertRaises(AttributeError):
+            mergic.equal('non', 'sense')
+
+    def test_order_doesnt_matter_for_equality(self):
+        self.assertTrue(mergic.equal({1: [1, 2]}, {1: [2, 1]}))
+
+    def test_not_equal_if_key_different(self):
+        self.assertFalse(mergic.equal({1: [1]}, {2: [1]}))
+
+    def test_not_equal_if_value_different(self):
+        self.assertFalse(mergic.equal({1: [1]}, {1: [2]}))
+
+    def test_not_equal_if_value_moves(self):
+        self.assertFalse(mergic.equal({1: [1, 2], 2: [3]},
+                                      {1: [1], 2: [2, 3]}))
+
+    def test_slightly_interesting_equality(self):
+        self.assertTrue(mergic.equal({1: [1, 2, 3], 2: ['a']},
+                                     {2: ['a'], 1: [3, 2, 1]}))
+
+
 if __name__ == '__main__':
     unittest.main()
