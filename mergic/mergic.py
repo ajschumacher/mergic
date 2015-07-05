@@ -165,40 +165,43 @@ def equal(first, second):
 
     """
     try:
-        d = diff(first, second)
-        if d == {}:
+        changes = diff(first, second)
+        if changes == {}:
             return True
     except ValueError:
         pass
     return False
 
 
-def apply_diff_(args):
-    original = json.loads(args.partition.read())
-    check(original)
-    changes = json.loads(args.patch.read())
-
+def apply_diff(partition, patch):
     mixed_from = set()
     mixed_to = set()
-    for key, values in changes.items():
-        if original.get(key) == values:
+    for key, values in patch.items():
+        if partition.get(key) == values:
             # this shouldn't happen, but still...
-            del(original[key])
+            del(partition[key])
         else:
             mixed_to.update(values)
             to_find = mixed_to - mixed_from
-            for key_from, values_from in original.items():
+            for key_from, values_from in partition.items():
                 values_from = set(values_from)
                 if to_find & values_from:
                     mixed_from.update(values_from)
-                    del(original[key_from])
+                    del(partition[key_from])
             not_found = to_find - mixed_from
             if not_found:
                 raise ValueError(not_found)
     if mixed_from != mixed_to:
         not_assigned = mixed_from - mixed_to
         raise ValueError(not_assigned)
-    original.update(changes)
+    partition.update(patch)
+
+
+def apply_diff_(args):
+    original = json.loads(args.partition.read())
+    check(original)
+    changes = json.loads(args.patch.read())
+    apply_diff(original, changes)
     print_json(original)
 
 
