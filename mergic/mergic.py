@@ -115,12 +115,12 @@ def diff(first, second):
     """
     mixed_from = set()
     mixed_to = set()
-    changes = dict()
+    patch = dict()
     for key, values in second.items():
         if set(first.get(key, [])) == set(values):
             del(first[key])
         else:
-            changes[key] = values
+            patch[key] = values
             mixed_to.update(values)
             to_find = mixed_to - mixed_from
             for key_from, values_from in first.items():
@@ -134,7 +134,7 @@ def diff(first, second):
     if mixed_from != mixed_to:
         not_assigned = mixed_from - mixed_to
         raise ValueError(not_assigned)
-    return changes
+    return patch
 
 
 def diff_(args):
@@ -143,8 +143,8 @@ def diff_(args):
     check(first)
     second = json.loads(args.second.read())
     check(second)
-    changes = diff(first, second)
-    print_json(changes)
+    patch = diff(first, second)
+    print_json(patch)
 
 
 def equal(first, second):
@@ -165,8 +165,8 @@ def equal(first, second):
 
     """
     try:
-        changes = diff(first, second)
-        if changes == {}:
+        patch = diff(first, second)
+        if patch == {}:
             return True
     except ValueError:
         pass
@@ -200,8 +200,8 @@ def apply_diff(partition, patch):
 def apply_diff_(args):
     original = json.loads(args.partition.read())
     check(original)
-    changes = json.loads(args.patch.read())
-    apply_diff(original, changes)
+    patch = json.loads(args.patch.read())
+    apply_diff(original, patch)
     print_json(original)
 
 
