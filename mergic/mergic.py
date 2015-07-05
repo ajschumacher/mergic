@@ -10,6 +10,7 @@ from itertools import combinations
 from collections import Counter
 from collections import OrderedDict
 
+__version__ = '0.0.7'
 
 # Naming convention:
 # A leading underscore means the function takes "self"
@@ -321,6 +322,11 @@ def _make_(self, args):
 def _script(self):
     """Parse command-line arguments and expose functionality."""
     parser = argparse.ArgumentParser()
+
+    parser.add_argument('-V', '--version',
+                        action='version',
+                        version='%(prog)s ' + __version__)
+
     subparsers = parser.add_subparsers(dest='command')
 
     p_calc = subparsers.add_parser('calc',
