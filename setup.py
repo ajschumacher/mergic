@@ -1,9 +1,13 @@
 from setuptools import setup
+from mergic import __version__
+
+
+description = 'workflow support for reproducible deduplication and merging'
 
 with open('README.rst') as file:
     long_description = file.read()
 
-description = 'workflow support for reproducible deduplication and merging'
+url = 'https://github.com/ajschumacher/mergic'
 
 setup(name='mergic',
       packages=['mergic'],
@@ -12,9 +16,9 @@ setup(name='mergic',
       license='MIT',
       author='Aaron Schumacher',
       author_email='ajschumacher@gmail.com',
-      url='https://github.com/ajschumacher/mergic',
-      download_url='https://github.com/ajschumacher/mergic/tarball/0.0.6',
-      version='0.0.6',
+      url=url,
+      download_url=url + '/tarball/' + __version__,
+      version=__version__,
       entry_points={'console_scripts': ['mergic = mergic:script']},
       classifiers=["Programming Language :: Python",
                    "Programming Language :: Python :: 2.7",
